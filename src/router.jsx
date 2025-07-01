@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import SanurDetail from './pages/SanurDetail';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export const router = createBrowserRouter([
@@ -15,5 +16,13 @@ export const router = createBrowserRouter([
         <Dashboard />
       </ProtectedRoute>
     ),
+  },
+  {
+  path: '/dashboard/:areaId',
+  element: (
+    <ProtectedRoute>
+      <SanurDetail />
+    </ProtectedRoute>
+  ),
   },
 ]);

@@ -41,7 +41,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+        <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-red-600">
           Login
         </button>
       </form>

@@ -2,7 +2,7 @@
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { Home, User, DollarSign, Briefcase, BarChart3 } from 'lucide-react';
+import { Home, User, DollarSign, Briefcase, BarChart3, ChevronRight } from 'lucide-react';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -60,34 +60,40 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1 */}
-          <div className="bg-gray-200 rounded-xl overflow-hidden hover:shadow-lg cursor-pointer">
-            <img
-              src="https://chuboot.github.io/melalilali/assets/img/hisi.png"
-              alt="Sanur SEZ"
-              className="w-full h-48 object-contain bg-gray-300"
-            />
-            <div className="p-4">
-              <h4 className="text-lg font-semibold mb-2">Sanur SEZ</h4>
-              <p className="text-gray-600 text-sm">
-                A hub for medical excellence and world-class tourism experiences
-              </p>
-            </div>
-          </div>
+          <div
+  onClick={() => navigate('/dashboard/sanur')}
+  className="bg-gray-200 rounded-xl overflow-hidden hover:shadow-lg cursor-pointer"
+>
+  <img
+    src="https://chuboot.github.io/melalilali/assets/img/hisi.png"
+    alt="Sanur SEZ"
+    className="w-full h-48 object-contain bg-gray-300"
+  />
+  <div className="p-4">
+    <h4 className="text-lg font-semibold mb-2">Sanur SEZ</h4>
+    <p className="text-gray-600 text-sm">
+      A hub for medical excellence and world-class tourism experiences
+    </p>
+  </div>
+</div>
 
-          {/* Card 2 */}
-          <div className="border-2 border-green-500 rounded-xl overflow-hidden hover:shadow-lg cursor-pointer">
-            <img
-              src="https://chuboot.github.io/melalilali/assets/img/hisi.png"
-              alt="Kura Kura Bali SEZ"
-              className="w-full h-48 object-contain bg-white"
-            />
-            <div className="p-4">
-              <h4 className="text-lg font-semibold mb-2">Kura Kura Bali SEZ</h4>
-              <p className="text-gray-600 text-sm">
-                A dynamic hub for creative industries, sustainable tourism, and cultural innovation
-              </p>
-            </div>
-          </div>
+{/* Card 2 - Link to Kura Kura Bali SEZ */}
+<div
+  onClick={() => navigate('/dashboard/kura-kura')}
+  className="border-2 border-green-500 rounded-xl overflow-hidden hover:shadow-lg cursor-pointer"
+>
+  <img
+    src="https://chuboot.github.io/melalilali/assets/img/kkb.png"
+    alt="Kura Kura Bali SEZ"
+    className="w-full h-48 object-contain bg-white"
+  />
+  <div className="p-4">
+    <h4 className="text-lg font-semibold mb-2">Kura Kura Bali SEZ</h4>
+    <p className="text-gray-600 text-sm">
+      A dynamic hub for creative industries, sustainable tourism, and cultural innovation
+    </p>
+  </div>
+</div>
         </div>
       </main>
     </div>
