@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import SanurDetail from './pages/SanurDetail';
 import ProtectedRoute from './components/ProtectedRoute';
 
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
   path: '/dashboard/:areaId',
   element: (
     <ProtectedRoute>
+      
       <SanurDetail />
     </ProtectedRoute>
   ),
