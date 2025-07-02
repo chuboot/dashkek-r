@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import SanurDetail from './pages/SanurDetail';
 import ProtectedRoute from './components/ProtectedRoute';
+import ListPelakuUsaha from './pages/ListPelakuUsaha';
 
 
 export const router = createBrowserRouter([
@@ -26,5 +27,9 @@ export const router = createBrowserRouter([
       <SanurDetail />
     </ProtectedRoute>
   ),
+  },
+  {
+    path: '/dashboard/:areaId/pelaku-usaha',
+    element: <ListPelakuUsaha />,
   },
 ]);

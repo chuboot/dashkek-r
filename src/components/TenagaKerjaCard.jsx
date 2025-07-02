@@ -1,36 +1,40 @@
 // src/components/TenagaKerjaCard.jsx
 import React, { useEffect, useState } from 'react';
 import { Circle } from 'rc-progress';
+import { useParams } from 'react-router-dom'; // <-- Add this import
 
 
 const TenagaKerjaCard = () => {
   const [jumlahPekerja, setJumlahPekerja] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { areaId } = useParams(); // <-- Get areaId from route params
 
   useEffect(() => {
     fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR_ECkK7QC1cAwstl9nqLf-HA3ySzXySjugSqVCsXiendHwEun3giJBH6SyIuiQR9M63K_IR6FQ2UYH/pub?output=csv')
       .then((response) => response.text())
       .then((data) => {
         const rows = data.split('\n').filter(row => row.trim() !== '');
+        const headers = rows[0].split(',').map(header => header.trim());
+        let totalPekerja = 0;
+        const pekerjaColumnIndex = headers.indexOf('Pekerja');
+        const lokasiColumnIndex = headers.indexOf('LokasiKEK');
 
-        const headers = rows[0].split(',').map(header => header.trim()); // Mengambil header dan membersihkan spasi
-        let totalPekerja = 0; // Initialize total for summation
-        // Mencari indeks kolom "Pekerja"
-                const pekerjaColumnIndex = headers.indexOf('Pekerja');
+        for (let i = 1; i < rows.length; i++) {
+          const values = rows[i].split(',').map(value => value.trim());
+          if (
+            values.length > pekerjaColumnIndex &&
+            values.length > lokasiColumnIndex
+          ) {
+            const lokasiValue = values[lokasiColumnIndex].toLowerCase();
+            if (lokasiValue === areaId?.toLowerCase()) {
+              const pekerjaValue = parseFloat(values[pekerjaColumnIndex]);
+              if (!isNaN(pekerjaValue)) {
+                totalPekerja += pekerjaValue;
+              }
+            }
+          }
+        }
 
-                // Hanya memparsing kolom "Pekerja" dan menghitung totalnya
-                for (let i = 1; i < rows.length; i++) {
-                    const values = rows[i].split(',').map(value => value.trim()); // Mengambil nilai dan membersihkan spasi
-                    if (values.length > pekerjaColumnIndex) { // Memastikan ada cukup kolom
-                        const pekerjaValue = parseFloat(values[pekerjaColumnIndex]); // Convert to number
-                        if (!isNaN(pekerjaValue)) { // Check if it's a valid number
-                            totalPekerja += pekerjaValue; // Add to total
-                        } else {
-                            console.warn(`Baris ${i + 1}: Nilai "${values[pekerjaColumnIndex]}" di kolom "Pekerja" bukan angka. Dilewati dari total.`);
-                        }
-                    }
-                }
-        
         setJumlahPekerja(totalPekerja);
         setLoading(false);
       })
@@ -38,7 +42,7 @@ const TenagaKerjaCard = () => {
         console.error('Error fetching data: ', error);
         setLoading(false);
       });
-  }, []);
+  }, [areaId]);
 
   return (
     <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg">
