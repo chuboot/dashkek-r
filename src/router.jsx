@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import SanurDetail from './pages/SanurDetail';
+import AreaDetail from './pages/AreaDetail';
 import ProtectedRoute from './components/ProtectedRoute';
 import ListPelakuUsaha from './pages/ListPelakuUsaha';
+import NotFound from './pages/NotFound';
 
 
 export const router = createBrowserRouter([
@@ -23,13 +24,16 @@ export const router = createBrowserRouter([
   path: '/dashboard/:areaId',
   element: (
     <ProtectedRoute>
-      
-      <SanurDetail />
+      <AreaDetail />
     </ProtectedRoute>
   ),
   },
   {
     path: '/dashboard/:areaId/pelaku-usaha',
     element: <ListPelakuUsaha />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);

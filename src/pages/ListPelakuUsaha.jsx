@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
 const ListPelakuUsaha = () => {
   const { areaId } = useParams();
@@ -30,39 +31,42 @@ const ListPelakuUsaha = () => {
   }, [areaId]);
 
   return (
-    <div className="p-6">
-      {/* Breadcrumb */}
-      <nav className="text-sm mb-4" aria-label="Breadcrumb">
-        <ol className="list-reset flex text-gray-600">
-          <li>
-            <Link to="/dashboard" className="hover:underline text-blue-600">Home</Link>
-          </li>
-          <li>
-            <span className="mx-2">/</span>
-          </li>
-          <li>
-            <Link to={`/dashboard/${areaId}`} className="hover:underline text-blue-600 capitalize">
-              Dashboard {areaId}
-            </Link>
-          </li>
-          <li>
-            <span className="mx-2">/</span>
-          </li>
-          <li className="text-gray-800 font-semibold">Daftar Pelaku Usaha</li>
-        </ol>
-      </nav>
-      {/* End Breadcrumb */}
+    <div className="flex min-h-screen bg-[#FFF7EF] text-gray-800">
+      <Sidebar />
+      <main className="flex-1 p-10">
+        {/* Breadcrumb */}
+        <nav className="text-sm mb-4" aria-label="Breadcrumb">
+          <ol className="list-reset flex text-gray-600">
+            <li>
+              <Link to="/dashboard" className="hover:underline text-blue-600">Home</Link>
+            </li>
+            <li>
+              <span className="mx-2">/</span>
+            </li>
+            <li>
+              <Link to={`/dashboard/${areaId}`} className="hover:underline text-blue-600 capitalize">
+                Dashboard {areaId}
+              </Link>
+            </li>
+            <li>
+              <span className="mx-2">/</span>
+            </li>
+            <li className="text-gray-800 font-semibold">Daftar Pelaku Usaha</li>
+          </ol>
+        </nav>
+        {/* End Breadcrumb */}
 
-      <h2 className="text-2xl font-bold mb-4">Daftar Pelaku Usaha</h2>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <ul className="list-disc pl-6">
-          {listPU.map((nama, idx) => (
-            <li key={idx}>{nama}</li>
-          ))}
-        </ul>
-      )}
+        <h2 className="text-2xl font-bold mb-4">Daftar Pelaku Usaha</h2>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <ul className="list-disc pl-6">
+            {listPU.map((nama, idx) => (
+              <li key={idx}>{nama}</li>
+            ))}
+          </ul>
+        )}
+      </main>
     </div>
   );
 };
