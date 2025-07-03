@@ -45,7 +45,7 @@ const TenagaKerjaCard = () => {
   }, [areaId]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg">
+    <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-2">
                 <div className="bg-red-100 text-red-500 p-2 rounded-full">

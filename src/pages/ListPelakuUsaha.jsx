@@ -60,11 +60,31 @@ const ListPelakuUsaha = () => {
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <ul className="list-disc pl-6">
-            {listPU.map((nama, idx) => (
-              <li key={idx}>{nama}</li>
-            ))}
-          </ul>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-[#FFF3E0] rounded-lg shadow">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 bg-[#FFD8A8] text-left text-orange-700 font-semibold rounded-tl-lg">No</th>
+                  <th className="px-4 py-2 bg-[#FFD8A8] text-left text-orange-700 font-semibold rounded-tr-lg">Nama Pelaku Usaha</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listPU.length === 0 ? (
+                  <tr>
+                    <td colSpan="2" className="px-4 py-4 text-center text-gray-500">Tidak ada data</td>
+                  </tr>
+                ) : (
+                  listPU.map((nama, idx) => (
+                    <tr key={idx} className={idx % 2 === 0 ? 'bg-[#FFF7EF]' : 'bg-[#FFE0B2]'}
+                    >
+                      <td className="px-4 py-2 text-orange-900 font-medium">{idx + 1}</td>
+                      <td className="px-4 py-2 text-gray-800">{nama}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         )}
       </main>
     </div>
