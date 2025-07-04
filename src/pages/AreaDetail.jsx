@@ -53,18 +53,22 @@ export default function AreaDetail() {
           "Welcome to Dashboard KEK — shaping sustainable economic zones for a
           better tomorrow. Your strategic journey starts here."
         </p>
-        <div className="mb-6 text-sm flex items-center space-x-2">
-          {/* Home */}
-          <Link
-            to="/dashboard"
-            className="text-blue-500 hover:underline hover:text-blue-700 transition-colors flex items-center"
-          >
-            Home
-          </Link>
-          <ChevronRight className="w-4 h-4 text-gray-400" />
-          {/* Current Page */}
-          <span className="text-orange-500 font-semibold">{area.title}</span>
-        </div>
+        <nav
+          className="border-y border-y-gray-200 px-6 py-3 mb-6 flex items-center"
+          aria-label="Breadcrumb"
+        >
+          <ol className="flex items-center space-x-2 text-gray-600">
+            <li>
+              <Link to="/dashboard" className="hover:underline text-blue-600 font-medium">
+                Home
+              </Link>
+            </li>
+            <li>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+            </li>
+            <li className="text-orange-500 font-semibold">{area.title}</li>
+          </ol>
+        </nav>
         <div className="mb-8">
           <img
             src={area.image}
