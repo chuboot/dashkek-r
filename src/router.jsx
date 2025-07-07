@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
   ),
   },
   {
-    path: '/dashboard/:areaId/pelaku-usaha/:namaPU',
+    path: '/dashboard/:areaId/pelaku-usaha/:nama',
     element: (
       <ProtectedRoute>
         <DetailPelakuUsaha />

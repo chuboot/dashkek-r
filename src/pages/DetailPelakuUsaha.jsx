@@ -1,48 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import { ChevronRight } from "lucide-react";
-
-// Fungsi slugify sederhana
-function slugify(text) {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')           // Ganti spasi dengan -
-    .replace(/[^\w\-]+/g, '')       // Hapus karakter non-word
-    .replace(/\-\-+/g, '-');        // Ganti multiple - dengan single -
-}
+import { ChevronRight, ChartNoAxesCombined, Layers, Factory, CircleUserRound, RulerDimensionLine, LayoutGrid } from "lucide-react";
 
 const DetailPelakuUsaha = () => {
-  const { areaId, namaPU } = useParams();
+  const { areaId, nama } = useParams();
   const [detail, setDetail] = useState(null);
   const [headers, setHeaders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR_ECkK7QC1cAwstl9nqLf-HA3ySzXySjugSqVCsXiendHwEun3giJBH6SyIuiQR9M63K_IR6FQ2UYH/pub?output=csv')
-      .then((response) => response.text())
+    fetch(`https://sheetdb.io/api/v1/g9tm6es3iwk8i/search?NamaPU=${encodeURIComponent(nama)}`)
+      .then((response) => response.json())
       .then((data) => {
-        const rows = data.split('\n').filter(row => row.trim() !== '');
-        const headersArr = rows[0].split(',').map(header => header.trim());
-        setHeaders(headersArr);
-        for (let i = 1; i < rows.length; i++) {
-          const values = rows[i].split(',').map(v => v.trim());
-          const lokasiIdx = headersArr.indexOf('LokasiKEK');
-          const namaPUIdx = headersArr.indexOf('NamaPU');
-          if (
-            values.length === headersArr.length &&
-            values[lokasiIdx].trim().toLowerCase() === areaId?.trim().toLowerCase() &&
-            slugify(values[namaPUIdx]) === namaPU // <-- gunakan slugify di sini
-          ) {
-            setDetail(values);
-            break;
-          }
+        if (data.length > 0) {
+          setHeaders(data[0]);
+          // console.log(data[0]);
         }
         setLoading(false);
       });
-  }, [areaId, namaPU]);
+  }, [areaId, nama]);
+
+  if (loading) {
+    return <div className="text-center text-lg mt-10">Loading...</div>;
+  }
+
+  if (!headers) {
+    return <div className="text-center text-lg mt-10">Data tidak ditemukan.</div>;
+  }
+
 
   return (
     <div className="flex min-h-screen bg-[#FFF7EF] text-gray-800">
@@ -81,48 +67,111 @@ const DetailPelakuUsaha = () => {
             <li>
               <ChevronRight className="w-4 h-4 text-gray-400" />
             </li>
-            <li className="text-orange-500 font-semibold">{detail ? detail[headers.indexOf('NamaPU')] : namaPU}</li>
+            <li className="text-orange-500 font-semibold">{detail ? detail.NamaPU : nama}</li>
           </ol>
         </nav>
         {/* End Breadcrumb */}
-
         <h2 className="text-2xl font-bold mb-4">Detail Pelaku Usaha</h2>
-        {loading ? (
-          <div>Loading...</div>
-        ) : detail ? (
-          <>
-            {/* List NamaPU, LuasLahan, Sektor */}
-            <ul className="mb-6 list-disc pl-6">
-              <li>
-                <span className="font-semibold text-orange-700">Nama Pelaku Usaha:</span>{' '}
-                {detail[headers.indexOf('NamaPU')]}
-              </li>
-              <li>
-                <span className="font-semibold text-orange-700">Luas Lahan:</span>{' '}
-                {detail[headers.indexOf('LuasLahan')]}
-              </li>
-              <li>
-                <span className="font-semibold text-orange-700">Sektor:</span>{' '}
-                {detail[headers.indexOf('Sektor')]}
-              </li>
-            </ul>
-            {/* Tabel detail semua kolom */}
-            <div className="overflow-x-auto">
-              <table className="min-w-fit bg-[#FFF3E0] rounded-lg shadow">
-                <tbody>
-                  {headers.map((header, idx) => (
-                    <tr key={idx}>
-                      <td className="px-4 py-2 font-semibold text-orange-700">{header}</td>
-                      <td className="px-4 py-2 text-gray-800">{detail[idx]}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+           <div className="min-h-screen p-4">
+              <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow">
+                {console.log(headers)}
+          <div className="p-6 border-b border-gray-200">
+                <h2 className="text-2xl font-bold mb-4">{headers.NamaPU}</h2>
+                <h4 className="text-xl text-gray-500 mb-4">{headers.BrandPU}</h4>
+          </div>
+                {/* Overview Section */}
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center mb-4">
+            <LayoutGrid size={20}/>
+          <h2 className="text-xl font-semibold text-gray-700 ml-2 flex items-center">Overview</h2>
+          </div>
+            
+          
+          <div className="grid grid-cols-1  gap-4 text-gray-700">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+              <ChartNoAxesCombined size={15}/>
+              <span className="ml-2 font-medium">Total Investasi</span>
+              </div>
+              <span>Rp.{headers.Investasi}</span>
             </div>
-          </>
-        ) : (
-          <div className="text-gray-500">Data tidak ditemukan.</div>
-        )}
+            <div className="flex justify-between items-center">
+              <div className='flex items-center'>
+              <Layers size={15} />
+              <span className="ml-2 font-medium">Sektor</span>
+              </div>
+              <span>{headers.Sektor}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className='flex items-center'>
+              <Factory size={15} />
+              <span className="ml-2 font-medium">Progres Pembangunan</span>
+              </div>
+              <span>{headers.Progress}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className='flex items-center'>
+              <CircleUserRound size={15}/>
+              <span className="ml-2 font-medium">Tenaga Kerja</span>
+              </div>
+              <span>{headers.Pekerja}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className='flex items-center'>
+                <RulerDimensionLine size={15}/>
+              <span className="ml-2 font-medium">Luas Lahan</span>
+              </div>
+              <span>{headers.LuasLahan}</span>
+            </div>
+          </div>
+        </div>
+        {/* Description Section */}
+        <div className="p-6 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+            Deskripsi
+          </h2>
+          <p className="text-gray-700 leading-relaxed">{headers.Desc}</p>
+        </div>
+        {/* Update Section */}
+        <div className="p-6">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Update
+          </h2>
+          <ul className="space-y-4">
+{Array.isArray(headers.Update) ? (
+  headers.Update.map((upd, index) => (
+    <li key={index} className="relative pl-6">
+      <div className="absolute left-0 top-1.5 w-2 h-2 bg-gray-400 rounded-full"></div>
+      <div className="absolute left-1.5 top-1.5 h-full border-l border-gray-300"></div>
+      <p className="text-sm font-semibold text-gray-800">{upd.date}</p>
+      <p className="text-gray-700">{upd.description}</p>
+    </li>
+  ))
+) : (
+  Array.isArray(JSON.parse(headers.Update || "[]")) &&
+  JSON.parse(headers.Update || "[]").map((upd, index) => (
+    <li key={index} className="relative pl-6">
+      <div className="absolute left-0 top-1.5 w-2 h-2 bg-gray-400 rounded-full"></div>
+      <div className="absolute left-1.5 top-1.5 h-full border-l border-gray-300"></div>
+      <p className="text-sm font-semibold text-gray-800">{upd.date}</p>
+      <p className="text-gray-700">{upd.description}</p>
+    </li>
+  ))
+)}
+          </ul>
+        </div>
+
+                {/* {Object.entries(headers).map(([key, value]) => (
+                  <p key={key} className="mb-2">
+                    <span className="font-semibold">{key}:</span> {value}
+                  </p>
+                ))} */}
+                
+              </div>
+          </div>
+ 
       </main>
     </div>
   );
