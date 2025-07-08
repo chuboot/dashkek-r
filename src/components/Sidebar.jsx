@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, User, DollarSign, Briefcase, BarChart3, Menu, X } from 'lucide-react';
+import { Home, User, DollarSign, Briefcase, BarChart3, Menu, X, Gem } from 'lucide-react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 
@@ -31,7 +31,7 @@ export default function Sidebar() {
       {/* Mobile Top Bar */}
       <div className="md:hidden flex-col items-start justify-between bg-[#FEEEDC] p-4 shadow">
        <div className="flex items-center">
-          <img src="https://img.icons8.com/ios-filled/50/000000/marker.png" alt="Logo" className="w-6 h-6" />
+         <Gem />
        </div>
         <button onClick={toggleSidebar}>
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -42,10 +42,10 @@ export default function Sidebar() {
       <div className={`fixed top-0 left-0 h-full w-64 bg-[#FEEEDC] p-6 flex flex-col justify-between z-50 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 md:static md:translate-x-0 md:flex md:z-auto`}>
         <div>
           {/* Desktop logo only */}
-          <h1 className="text-2xl font-bold mb-8 flex items-center hidden md:flex">
-            <img src="https://img.icons8.com/ios-filled/50/000000/marker.png" alt="Logo" className="w-6 h-6 mr-2" />
-            Dashboard KEK
-          </h1>
+          <div className="items-center hidden md:flex mb-8">
+            <Gem />
+            <h1 className='text-2xl font-bold ml-2'>Dashboard KEK</h1>
+          </div>
 
           <nav className="space-y-4">
             {menuItems.map(({ label, icon: Icon, path }) => {
