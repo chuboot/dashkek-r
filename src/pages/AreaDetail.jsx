@@ -1,10 +1,9 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
-import { Circle } from "rc-progress";
 import TenagaKerjaCard from "../components/TenagaKerjaCard";
 import InvestasiCard from "../components/InvestasiCard";
 import PelakuUsahaCard from "../components/PelakuUsahaCard";
 import Sidebar from "../components/Sidebar";
+import Breadcrumb from "../components/Breadcrumb";
 
 
 const areaData = {
@@ -47,13 +46,21 @@ export default function AreaDetail() {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 p-10">
+      <main className="flex-1 p-5 md:p-10">
         <h2 className="text-3xl font-semibold mb-2">Welcome, Mr. Raihan</h2>
         <p className="text-gray-600 mb-4">
           "Welcome to Dashboard KEK — shaping sustainable economic zones for a
           better tomorrow. Your strategic journey starts here."
         </p>
-        <nav
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: "Home", to: "/dashboard" },
+            { label: `${areaId}-SEZ`, active: true }
+          ]}
+        />
+        {/* Breadcrumb */}
+        {/* <nav
           className="border-y border-y-gray-200 px-6 py-3 mb-6 flex items-center"
           aria-label="Breadcrumb"
         >
@@ -68,7 +75,7 @@ export default function AreaDetail() {
             </li>
             <li className="text-orange-500 font-semibold">{area.title}</li>
           </ol>
-        </nav>
+        </nav> */}
         <div className="mb-8">
           <img
             src={area.image}

@@ -19,7 +19,7 @@ export default function Dashboard() {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 p-10">
+      <main className="flex-1 p-5 md:p-10">
         <h2 className="text-3xl font-semibold mb-2">Welcome, Mr. Raihan</h2>
         <p className="text-base text-gray-600 mb-6 max-w-xl">
           "Welcome to Dashboard KEK — shaping sustainable economic zones for a better tomorrow. Your strategic journey starts here."
