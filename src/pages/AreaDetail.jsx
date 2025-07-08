@@ -4,6 +4,7 @@ import InvestasiCard from "../components/InvestasiCard";
 import PelakuUsahaCard from "../components/PelakuUsahaCard";
 import Sidebar from "../components/Sidebar";
 import Breadcrumb from "../components/Breadcrumb";
+import { Users } from "lucide-react"; // Import the Users icon from lucide-react
 
 
 const areaData = {

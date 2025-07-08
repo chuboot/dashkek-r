@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Circle } from 'rc-progress';
 import { useParams } from 'react-router-dom'; // <-- Add this import
+import { Users } from 'lucide-react'; // Import the Users icon from lucide-react
 
 
 const TenagaKerjaCard = () => {
@@ -49,10 +50,7 @@ const TenagaKerjaCard = () => {
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-2">
                 <div className="bg-red-100 text-red-500 p-2 rounded-full">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                   
-                  <path d="M18.5 19.5L20 21M11 14C7.13401 14 4 17.134 4 21H11M19 17.5C19 18.8807 17.8807 20 16.5 20C15.1193 20 14 18.8807 14 17.5C14 16.1193 15.1193 15 16.5 15C17.8807 15 19 16.1193 19 17.5ZM15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
+                  <Users />
                 </div>
                 <span className="font-semibold">Tenaga Kerja</span>
               </div>

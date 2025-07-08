@@ -12,7 +12,7 @@ const DetailPelakuUsaha = () => {
 
   useEffect(() => {
     // fetch(`https://sheetdb.io/api/v1/g9tm6es3iwk8i/search?NamaPU=${encodeURIComponent(nama)}`)
-    fetch(`https://script.google.com/macros/s/AKfycbx7K0jt8eeJc1h4hPsg2CtzEc9xwI2jrSBJ7c_JzlByP-_OiOG4E8Fm636XidcmFxs08A/exec?NamaPU=${encodeURIComponent(nama)}`)
+    fetch(`https://script.google.com/macros/s/AKfycbzrPEY_RMqX-91XaSygT8_wMWxudu85T2ZNdcG6t4iHgqEeH_dQ2gqkz-c4CVInOwwA3Q/exec?NamaPU=${encodeURIComponent(nama)}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
@@ -47,15 +47,15 @@ const DetailPelakuUsaha = () => {
         />
         {/* End Breadcrumb */}
         <h2 className="text-2xl font-bold mb-4">Detail Pelaku Usaha</h2>
-        <div className="min-h-screen p-4">
-          <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow">
+        <div className="min-h-screen">
+          <div className="max-w-xl mx-auto bg-white p-4 md:p-6 rounded-lg shadow">
             {console.log(headers)}
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 md:p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold mb-4">{headers.NamaPU}</h2>
               <h4 className="text-xl text-gray-500 mb-4">&#40;{headers.BrandPU}&#41;</h4>
             </div>
             {/* Overview Section */}
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 md:p-6 border-b border-gray-200">
               <div className="flex items-center mb-4">
                 <LayoutGrid size={20} />
                 <h2 className="text-xl font-semibold text-gray-700 ml-2 flex items-center">Overview</h2>
@@ -101,7 +101,7 @@ const DetailPelakuUsaha = () => {
               </div>
             </div>
             {/* Description Section */}
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 md:p-6 border-b border-gray-200">
               <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
                 <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                 Deskripsi
@@ -109,7 +109,7 @@ const DetailPelakuUsaha = () => {
               <p className="text-gray-700 leading-relaxed">{headers.Desc}</p>
             </div>
             {/* Update Section */}
-            <div className="p-6">
+            <div className="p-4 md:p-6">
               <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">
                 <svg className="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 Update
@@ -118,7 +118,7 @@ const DetailPelakuUsaha = () => {
                 {Array.isArray(headers.Update) ? (
                   headers.Update.map((upd, index) => (
                     <li key={index} className="relative pl-6">
-                      <div className="absolute left-0 top-1.5 w-2 h-2 bg-gray-400 rounded-full"></div>
+                      <div className="absolute left-1 top-1.5 w-2 h-2 bg-gray-300 rounded-full"></div>
                       <div className="absolute left-1.5 top-1.5 h-full border-l border-gray-300"></div>
                       <p className="text-sm font-semibold text-gray-800">{upd.date}</p>
                       <p className="text-gray-700">{upd.description}</p>
@@ -128,7 +128,7 @@ const DetailPelakuUsaha = () => {
                   Array.isArray(JSON.parse(headers.Update || "[]")) &&
                   JSON.parse(headers.Update || "[]").map((upd, index) => (
                     <li key={index} className="relative pl-6">
-                      <div className="absolute left-0 top-1.5 w-2 h-2 bg-gray-400 rounded-full"></div>
+                      <div className="absolute left-1 top-1.5 w-2 h-2 bg-gray-300 rounded-full"></div>
                       <div className="absolute left-1.5 top-1.5 h-full border-l border-gray-300"></div>
                       <p className="text-sm font-semibold text-gray-800">{upd.date}</p>
                       <p className="text-gray-700">{upd.description}</p>
