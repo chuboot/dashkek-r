@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, User, DollarSign, Briefcase, BarChart3, Menu, X, Gem } from 'lucide-react';
+import { Home, User, DollarSign, Briefcase, BarChart3, Menu, X, Gem, HeartPlus } from 'lucide-react';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 
@@ -24,6 +24,7 @@ export default function Sidebar() {
     { label: 'Investasi', icon: DollarSign, path: '/dashboard/investasi' },
     { label: 'Tenaga Kerja', icon: Briefcase, path: '/dashboard/tenaga-kerja' },
     { label: 'Progress', icon: BarChart3, path: '/dashboard/progress' },
+    { label: 'KEK Kesehatan', icon: HeartPlus, path: '/dashboard/kekkesehatan' },
   ];
 
   return (
