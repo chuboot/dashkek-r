@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Breadcrumb from '../components/Breadcrumb';
 import {  ChartNoAxesCombined, Layers, Factory, CircleUserRound, RulerDimensionLine, LayoutGrid } from "lucide-react";
+import KesehatanDetail from '../components/KesehatanDetail';
 
 const DetailPelakuUsaha = () => {
   const { areaId, nama } = useParams();
@@ -100,6 +101,16 @@ const DetailPelakuUsaha = () => {
                 </div>
               </div>
             </div>
+            {/* Khusus untuk sektor Kesehatan */}
+      {headers.Sektor === "Kesehatan" && (
+        <KesehatanDetail data={detail} />
+      )}
+      {/* Cek apakah sektor adalah 'Kesehatan' */}
+       {/* {
+        headers.Sektor === "Kesehatan"
+          ? <h1>ini sektor kesehatan</h1>
+          : <h1>ini bukan sektor kesehatan</h1>
+      } */}
             {/* Description Section */}
             <div className="p-4 md:p-6 border-b border-gray-200">
               <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">

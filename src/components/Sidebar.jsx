@@ -31,9 +31,9 @@ export default function Sidebar() {
     <>
       {/* Mobile Top Bar */}
       <div className="md:hidden flex-col items-start justify-between bg-[#FEEEDC] p-4 shadow">
-       <div className="flex items-center">
-         <Gem />
-       </div>
+        <div className="flex items-center">
+          <Gem />
+        </div>
         <button onClick={toggleSidebar}>
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -44,7 +44,18 @@ export default function Sidebar() {
         <div>
           {/* Desktop logo only */}
           <div className="items-center hidden md:flex mb-8">
-            <Gem />
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <defs>
+                <linearGradient id="gradientStroke" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#FF6B6B" />
+                  <stop offset="100%" stopColor="#FFD93D" />
+                </linearGradient>
+              </defs>
+              <Gem
+                stroke="url(#gradientStroke)"
+                
+              />
+            </svg>
             <h1 className='text-2xl font-bold ml-2'>Dashboard KEK</h1>
           </div>
 
@@ -58,9 +69,8 @@ export default function Sidebar() {
                     navigate(path);
                     setIsOpen(false); // Close on mobile after navigation
                   }}
-                  className={`flex items-center w-full text-left p-2 rounded-lg transition-colors cursor-pointer ${
-                    isActive ? 'bg-orange-200' : 'bg-white hover:bg-orange-100'
-                  }`}
+                  className={`flex items-center w-full text-left p-2 rounded-lg transition-colors cursor-pointer ${isActive ? 'bg-orange-200' : 'bg-white hover:bg-orange-100'
+                    }`}
                 >
                   <Icon className="w-5 h-5 mr-3" />
                   {label}
