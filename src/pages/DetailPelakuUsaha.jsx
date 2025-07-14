@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Breadcrumb from '../components/Breadcrumb';
-import {  ChartNoAxesCombined, Layers, Factory, CircleUserRound, RulerDimensionLine, LayoutGrid } from "lucide-react";
+import { ChartNoAxesCombined, Layers, Factory, CircleUserRound, RulerDimensionLine, LayoutGrid } from "lucide-react";
 import KesehatanDetail from '../components/KesehatanDetail';
 
 const DetailPelakuUsaha = () => {
@@ -13,12 +13,14 @@ const DetailPelakuUsaha = () => {
 
   useEffect(() => {
     // fetch(`https://sheetdb.io/api/v1/g9tm6es3iwk8i/search?NamaPU=${encodeURIComponent(nama)}`)
-    fetch(`https://script.google.com/macros/s/AKfycbzrPEY_RMqX-91XaSygT8_wMWxudu85T2ZNdcG6t4iHgqEeH_dQ2gqkz-c4CVInOwwA3Q/exec?NamaPU=${encodeURIComponent(nama)}`)
+    // fetch(`https://script.google.com/macros/s/AKfycbzrPEY_RMqX-91XaSygT8_wMWxudu85T2ZNdcG6t4iHgqEeH_dQ2gqkz-c4CVInOwwA3Q/exec?NamaPU=${encodeURIComponent(nama)}`)
+    //https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec?namapu=PT%20Hotel%20International%20Sanur%20Indonesia
+    fetch(`https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec?namapu=${encodeURIComponent(nama)}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
           setHeaders(data[0]);
-          // console.log(data[0]);
+          console.log(data[0]);
         }
         setLoading(false);
       });
@@ -102,15 +104,10 @@ const DetailPelakuUsaha = () => {
               </div>
             </div>
             {/* Khusus untuk sektor Kesehatan */}
-      {headers.Sektor === "Kesehatan" && (
-        <KesehatanDetail data={detail} />
-      )}
-      {/* Cek apakah sektor adalah 'Kesehatan' */}
-       {/* {
-        headers.Sektor === "Kesehatan"
-          ? <h1>ini sektor kesehatan</h1>
-          : <h1>ini bukan sektor kesehatan</h1>
-      } */}
+            {headers.Sektor === "Kesehatan" && (
+              <KesehatanDetail data={headers} />
+            )}
+
             {/* Description Section */}
             <div className="p-4 md:p-6 border-b border-gray-200">
               <h2 className="text-xl font-semibold text-gray-700 mb-4 flex items-center">

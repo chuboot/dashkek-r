@@ -1,0 +1,5 @@
+9 july 2025 : Kebetuhan Tambahan Isi Web: 
+-Jumlah pasien, dikelompokkan berdasarkan WNA dan WNI
+-Jumlah SDM Kesehatan, terdiri dari WNA dan WNI
+-Jenis layanan yang tersedia
+-Rasio okupansi tempat tidur (Bed Occupancy Ratio)

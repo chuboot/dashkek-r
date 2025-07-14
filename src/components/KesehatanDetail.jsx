@@ -10,6 +10,13 @@ const KesehatanDetail = ({ data }) => {
         <div><strong>Jumlah SDM:</strong> {data.jumlahSDM}</div>
         <div><strong>Jumlah Layanan:</strong> {data.jumlahLayanan}</div>
         <div><strong>BOR:</strong> {data.bor}%</div> */}
+        {/* <div><strong>SDM:</strong> {data.Update}</div> */}
+        {console.log(data.Layanan)}
+        {Object.entries(data.Layanan).map(([key, value]) => (
+          <p key={key} className="mb-2">
+            <span className="font-semibold">{key}:</span> {value}
+          </p>
+        ))}
         <div><strong>Jumlah Pasien:</strong> 1232</div>
         <div><strong>Jumlah SDM:</strong> 588</div>
         <div><strong>Jumlah Layanan:</strong> 24</div>
