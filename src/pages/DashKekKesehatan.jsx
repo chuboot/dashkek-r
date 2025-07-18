@@ -83,7 +83,7 @@ export default function DashKekKesehatan() {
                     <section>
                         <h2 className="text-xl font-semibold mb-4">Rasio Okupansi Tempat Tidur (BOR)</h2>
                         <ul className="list-disc ml-5 space-y-1">
-                            <li>Jumlah Tempat Tidur: 200</li>
+                            <li>Jumlah Tempat Tidur: 100</li>
                             <li>Periode: Juni 2025</li>
                             <li>Hari Terpakai: 4.500 hari</li>
                             <li>BOR: 75%</li>

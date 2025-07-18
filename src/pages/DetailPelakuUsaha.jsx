@@ -51,7 +51,7 @@ const DetailPelakuUsaha = () => {
         {/* End Breadcrumb */}
         <h2 className="text-2xl font-bold mb-4">Detail Pelaku Usaha</h2>
         <div className="min-h-screen">
-          <div className="max-w-xl mx-auto bg-white p-4 md:p-6 rounded-lg shadow">
+          <div className="max-w-4xl mx-auto bg-white p-4 md:p-6 rounded-lg shadow">
             {console.log(headers)}
             <div className="p-4 md:p-6 border-b border-gray-200">
               <h2 className="text-2xl font-bold mb-4">{headers.NamaPU}</h2>
@@ -85,7 +85,7 @@ const DetailPelakuUsaha = () => {
                     <Factory size={15} />
                     <span className="ml-2 font-medium">Progres Pembangunan</span>
                   </div>
-                  <span>{headers.Progress}</span>
+                  <span>{headers.Progress * 100 + "%"}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <div className='flex items-center'>
