@@ -55,7 +55,7 @@ const TenagaKerjaCard = () => {
                 <span className="font-semibold">Tenaga Kerja</span>
               </div>
               <div className="w-16 h-16">
-                <Circle percent={50} strokeWidth={8} strokeColor="#f87171" />
+                <Circle percent={80} strokeWidth={15} strokeColor="#f87171" railWidth={6} />
               </div>
             </div>
             <div className="text-3xl font-bold text-center">{loading ? 'Loading...' : jumlahPekerja}</div>

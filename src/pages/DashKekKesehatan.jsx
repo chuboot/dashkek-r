@@ -14,9 +14,19 @@ const bedOccupancyData = [
 ];
 
 export default function DashKekKesehatan() {
+     // Fungsi untuk mengubah status sidebar
+      const [sidebarOpen, setSidebarOpen] = useState(false);
     return (
         <div className="flex min-h-screen bg-[#FFF7EF] text-gray-800">
-            <Sidebar />
+            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+            
+                  {/* Area konten */}
+                  <div className="flex-1 flex flex-col">
+                    {/* Header untuk mobile */}
+                    <header className="md:hidden flex items-center px-4 h-16 shadow bg-white">
+                      <button onClick={() => setSidebarOpen(true)}>☰</button>
+                      <h1 className="ml-4 font-semibold">Dashboard</h1>
+                    </header>
             <main className="flex-1 p-5 md:p-10">
                 {/* Breadcrumb */}
                 <Breadcrumb
@@ -102,6 +112,8 @@ export default function DashKekKesehatan() {
                     </section>
                 </div>
             </main>
+            </div>
+            {/* End Area konten */}
         </div>
     );
 }

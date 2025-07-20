@@ -30,9 +30,20 @@ const ListPelakuUsaha = () => {
       });
   }, [areaId]);
 
+  // Fungsi untuk mengubah status sidebar
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
   return (
     <div className="flex min-h-screen bg-[#FFF7EF] text-gray-800">
-      <Sidebar />
+      {/* Sidebar */}
+                  <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+                  {/* Header untuk mobile */}
+                  <div className="flex-1 flex flex-col">
+                      <header className="md:hidden flex items-center px-4 h-16 shadow bg-white">
+                          <button onClick={() => setSidebarOpen(true)}>☰</button>
+                          <h1 className="ml-4 font-semibold">DashKEK</h1>
+                      </header>
       <main className="flex-1 p-5 md:p-10">
         {/* Breadcrumb */}
         <Breadcrumb
@@ -42,33 +53,7 @@ const ListPelakuUsaha = () => {
             { label: "Pelaku Usaha", active: true }
           ]}
         />
-        {/* <nav
-          className=" border-y border-y-gray-200 px-6 py-3 mb-6 flex items-center"
-          aria-label="Breadcrumb"
-        >
-          <ol className="flex items-center space-x-2 text-gray-600">
-            <li>
-              <Link to="/dashboard" className="hover:underline text-blue-600 font-medium">
-                Home
-              </Link>
-            </li>
-            <li>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </li>
-            <li>
-              <Link
-                to={`/dashboard/${areaId}`}
-                className="hover:underline text-blue-600 font-medium capitalize"
-              >
-                {areaId}-SEZ
-              </Link>
-            </li>
-            <li>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </li>
-            <li className="text-orange-500 font-semibold">Pelaku Usaha</li>
-          </ol>
-        </nav> */}
+        
         {/* End Breadcrumb */}
 
         <h2 className="text-2xl font-bold mb-4">Daftar Pelaku Usaha</h2>
@@ -104,6 +89,7 @@ const ListPelakuUsaha = () => {
           </div>
         )}
       </main>
+      </div>
     </div>
   );
 };

@@ -1,97 +1,70 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
-import { Home, User, DollarSign, Briefcase, BarChart3, Menu, X, Gem, HeartPlus } from 'lucide-react';
-import { auth } from '../firebase';
-import { signOut } from 'firebase/auth';
+import { NavLink } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import {
+  Home,
+  Users,
+  BarChart3,
+  DollarSign,
+  Briefcase,
+  LogOut,
+} from "lucide-react";
 
-export default function Sidebar() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate('/');
-  };
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const menuItems = [
-    { label: 'Dashboard', icon: Home, path: '/dashboard' },
-    { label: 'BUPP / PU', icon: User, path: '/dashboard/sanur/pelaku-usaha' },
-    { label: 'Investasi', icon: DollarSign, path: '/dashboard/investasi' },
-    { label: 'Tenaga Kerja', icon: Briefcase, path: '/dashboard/tenaga-kerja' },
-    { label: 'Progress', icon: BarChart3, path: '/dashboard/progress' },
-    { label: 'KEK Kesehatan', icon: HeartPlus, path: '/dashboard/kekkesehatan' },
+export default function Sidebar({ isOpen, onClose }) {
+  const menu = [
+    { to: "/dashboard", label: "Dashboard", icon: Home },
+    { to: "/dashboard/sanur/pelaku-usaha", label: "BUPP / PU", icon: Users },
+    { to: "/investasi", label: "Investasi", icon: DollarSign },
+    { to: "/tenagakerja", label: "Tenaga Kerja", icon: Briefcase },
+    { to: "/progress", label: "Progress", icon: BarChart3 },
   ];
 
   return (
-    <>
-      {/* Mobile Top Bar */}
-      <div className="md:hidden flex-col items-start justify-between bg-[#FEEEDC] p-4 shadow">
-        <div className="flex items-center">
-          <Gem />
-        </div>
-        <button onClick={toggleSidebar}>
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+    <aside
+      className={`fixed md:static inset-y-0 left-0 z-20 w-64 flex flex-col
+                  bg-orange-400 text-white
+                  transform ${isOpen ? "translate-x-0" : "-translate-x-full"}
+                  md:translate-x-0 transition-transform duration-200`}
+    >
+      {/* Logo / Header */}
+      <div className="flex items-center justify-between px-6 h-16">
+        <span className="text-xl font-bold tracking-wide">DashKEK</span>
+        <button className="md:hidden" onClick={onClose}>
+          ✕
         </button>
       </div>
 
-      {/* Sidebar */}
-      <div className={`fixed top-0 left-0 h-full w-64 bg-[#FEEEDC] p-6 flex flex-col justify-between z-50 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 md:static md:translate-x-0 md:flex md:z-auto`}>
-        <div>
-          {/* Desktop logo only */}
-          <div className="items-center hidden md:flex mb-8">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-              <defs>
-                <linearGradient id="gradientStroke" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#FF6B6B" />
-                  <stop offset="100%" stopColor="#FFD93D" />
-                </linearGradient>
-              </defs>
-              <Gem
-                stroke="url(#gradientStroke)"
-                
-              />
-            </svg>
-            <h1 className='text-2xl font-bold ml-2'>Dashboard KEK</h1>
-          </div>
+      {/* Menu */}
+      <nav className="flex-1 px-4 space-y-2">
+        {menu.map(({ to, label, icon: Icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end
+            onClick={onClose}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-md transition
+               ${
+                 isActive
+                   ? "bg-amber-600 text-white"
+                   : "text-white/80 hover:bg-amber-800/80 hover:text-white"
+               }`
+            }
+          >
+            <Icon size={20} />
+            {label}
+          </NavLink>
+        ))}
+      </nav>
 
-          <nav className="space-y-4">
-            {menuItems.map(({ label, icon: Icon, path }) => {
-              const isActive = location.pathname === path;
-              return (
-                <button
-                  key={label}
-                  onClick={() => {
-                    navigate(path);
-                    setIsOpen(false); // Close on mobile after navigation
-                  }}
-                  className={`flex items-center w-full text-left p-2 rounded-lg transition-colors cursor-pointer ${isActive ? 'bg-orange-200' : 'bg-white hover:bg-orange-100'
-                    }`}
-                >
-                  <Icon className="w-5 h-5 mr-3" />
-                  {label}
-                </button>
-              );
-            })}
-          </nav>
-        </div>
-
-        <button onClick={handleLogout} className="mt-10 bg-red-500 text-white py-2 rounded hover:bg-red-600">
-          Logout
-        </button>
-      </div>
-
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
-          onClick={toggleSidebar}
-        ></div>
-      )}
-    </>
+      {/* Logout */}
+      <button
+        onClick={() => signOut(auth)}
+        className="flex items-center gap-3 px-6 py-3 text-white -500 hover:bg-[#35964f]/80 hover:text-white transition"
+      >
+        <LogOut size={20} />
+        Logout
+      </button>
+    </aside>
   );
 }
