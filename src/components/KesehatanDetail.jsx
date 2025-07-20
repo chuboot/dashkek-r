@@ -9,17 +9,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-const bedOccupancyData = [
-  { name: "Jan 2025", BOR: 35 },
-  { name: "Feb 2025", BOR: 45 },
-  { name: "Maret 2025", BOR: 75 },
-  { name: "April 2025", BOR: 65 },
-  { name: "May 2025", BOR: 55 },
-  { name: "Juni 2025", BOR: 75 },
-  { name: "Juli 2025", BOR: 87 },
-];
+
 
 const KesehatanDetail = ({ data }) => {
+  // Ambil jumlah tempat tidur dari object terakhir di data.BOR
+  const lastBOR = Array.isArray(data.BOR) && data.BOR.length > 0 ? data.BOR[data.BOR.length - 1] : null;
+  const jumlahTempatTidur = lastBOR ? lastBOR.jumlahTempatTidur : 0;
+  const periodeBOR = lastBOR ? lastBOR.periode : 0;
+  const hariTerpakai = lastBOR ? lastBOR.hariTerpakai : 0;
+  const borRatio = lastBOR ? lastBOR.bor : 0;
+
   return (
     <div className="p-4 md:p-6 border-b border-gray-200">
       <div className="flex items-center mb-4">
@@ -102,7 +101,7 @@ const KesehatanDetail = ({ data }) => {
             Jenis Layanan yang Tersedia
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-center">
-            {Object.entries(data.Layanan).map(([key, value], index) => (
+            {Object.entries(data.Layanan).map(([key, value]) => (
               <div key={key} className="bg-white rounded-2xl shadow p-4">
                 <p className="font-semibold text-orange-500">{value}</p>
               </div>
@@ -117,10 +116,10 @@ const KesehatanDetail = ({ data }) => {
           Rasio Okupansi Tempat Tidur (BOR)
         </h2>
         <ul className="list-disc ml-5 space-y-1">
-          <li>Jumlah Tempat Tidur: 100</li>
-          <li>Periode: Juni 2025</li>
-          <li>Hari Terpakai: 4.500 hari</li>
-          <li>BOR: 75%</li>
+          <li>Jumlah Tempat Tidur: {jumlahTempatTidur}</li>
+          <li>Periode: {periodeBOR}</li>
+          <li>Hari Terpakai: {hariTerpakai} hari</li>
+          <li>BOR: {borRatio} %</li>
         </ul>
 
         <div className="h-64 mt-4">
