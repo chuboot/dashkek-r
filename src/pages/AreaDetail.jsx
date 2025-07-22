@@ -91,7 +91,7 @@ const AreaDetail = () => {
                             {/* <h4 className="text-lg font-semibold mb-2">Isu Strategis</h4> */}
                             <div className="flex items-center space-x-2">
                                 <div className="bg-orange-100 text-orange-500 p-2 rounded-full">
-                                   <MessageSquareQuote />
+                                    <MessageSquareQuote />
                                 </div>
                                 <span className="font-semibold">Isu Strategis</span>
                             </div>

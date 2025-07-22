@@ -65,6 +65,13 @@ export default function Sidebar({ isOpen, onClose }) {
         <LogOut size={20} />
         Logout
       </button>
+      <div className="p-4 text-center text-xs text-white/70 border-t border-white/20">
+        <p className="text-sm mb-2">© 2025 DashKEK </p>
+        <p className="text-xs">Develop by </p>
+        <p className="text-xs">Pranata Komputer Administrator</p>  
+        <p className="text-xs">KEK Sanur & Kura Kura Bali</p>  
+      </div>
+      
     </aside>
   );
 }
