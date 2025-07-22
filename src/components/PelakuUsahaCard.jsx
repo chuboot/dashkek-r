@@ -45,7 +45,11 @@ const PelakuUsahaCard = () => {
           </div>
           <span className="font-semibold">Pelaku Usaha</span>
         </div>
-        <div className="text-4xl font-bold text-center mb-4">{loading ? 'Loading...' : jumlahPelakuUsaha}</div>
+        <div className="text-4xl md:text-5xl font-bold text-center py-2">{loading ? 'Loading...' : jumlahPelakuUsaha}</div>
+      <div>
+          {/* Optional: Add a tooltip or additional information here */}
+          <p className="text-sm text-gray-500 italic">Data dari Laporan Q1 2025</p>
+        </div>
       </div>
     </Link>
   );

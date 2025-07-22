@@ -46,8 +46,7 @@ const InvestasiCard = () => {
                 totalInvestasi += investasiValue; // Add to total
               } else {
                 console.warn(
-                  `Baris ${i + 1}: Nilai "${
-                    values[investasiColumnIndex]
+                  `Baris ${i + 1}: Nilai "${values[investasiColumnIndex]
                   }" di kolom "Pekerja" bukan angka. Dilewati dari total.`
                 );
               }
@@ -78,20 +77,26 @@ const InvestasiCard = () => {
   }, [areaId]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer">
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer flex justify-between">
+      <div className="flex flex-col justify-between">
         <div className="flex items-center space-x-2">
           <div className="bg-green-100 text-green-500 p-2 rounded-full">
             <ChartLine />
           </div>
           <span className="font-semibold">Investasi</span>
         </div>
-        <div className="w-16 h-16">
-          <Circle percent={75} strokeWidth={8} strokeColor="#4ade80" />
+        <div className="text-4xl md:text-5xl font-bold  py-3">
+          {loading ? "Loading..." : jumlahInvestasi}
+        </div>
+        <div>
+          {/* Optional: Add a tooltip or additional information here */}
+          <p className="text-sm text-gray-500 italic">Data dari Laporan Q1 2025 </p>
         </div>
       </div>
-      <div className="text-3xl font-bold text-center">
-        {loading ? "Loading..." : jumlahInvestasi}
+      <div className="flex items-center justify-center">
+        <div className="w-24 h-24r">
+          <Circle percent={25} strokeWidth={8} strokeColor="#4ade80" steps={{ count: 15, gap: -1 }} />
+        </div>
       </div>
     </div>
   );

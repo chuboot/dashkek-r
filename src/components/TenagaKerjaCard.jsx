@@ -46,21 +46,30 @@ const TenagaKerjaCard = () => {
   }, [areaId]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer">
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center space-x-2">
-                <div className="bg-red-100 text-red-500 p-2 rounded-full">
-                  <Users />
-                </div>
-                <span className="font-semibold">Tenaga Kerja</span>
-              </div>
-              <div className="w-16 h-16">
-                <Circle percent={80} strokeWidth={15} strokeColor="#f87171" railWidth={6} />
-              </div>
-            </div>
-            <div className="text-3xl font-bold text-center">{loading ? 'Loading...' : jumlahPekerja}</div>
+    <div className="bg-white p-6 rounded-2xl shadow hover:shadow-lg cursor-pointer flex justify-between">
+      <div className="flex flex-col justify-between">
+        <div className="flex items-center space-x-2">
+          <div className="bg-red-100 text-red-500 p-2 rounded-full">
+            <Users />
           </div>
-    
+          <span className="font-semibold">Tenaga Kerja</span>
+        </div>
+        <div className="text-4xl md:text-5xl font-bold  py-3">
+          {loading ? "Loading..." : jumlahPekerja}
+        </div>
+        <div>
+          {/* Optional: Add a tooltip or additional information here */}
+          <p className="text-sm text-gray-500 italic">Data dari Laporan Q1 2025</p>
+        </div>
+      </div>
+      <div className="flex items-center justify-center">
+        <div className="w-24 h-24r">
+          <Circle percent={80} strokeWidth={8} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
+        </div>
+      </div>
+
+    </div>
+
   );
 };
 

@@ -3,3 +3,5 @@
 -Jumlah SDM Kesehatan, terdiri dari WNA dan WNI
 -Jenis layanan yang tersedia
 -Rasio okupansi tempat tidur (Bed Occupancy Ratio)
+
+21 july 2025: Kebutuhan Update di bag Sanur dashbord menampilkan keseluruahan pu Kesehatan
