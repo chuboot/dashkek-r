@@ -38,15 +38,17 @@ const PelakuUsahaCard = () => {
 
   return (
     <Link to={`/dashboard/${areaId}/pelaku-usaha`}>
-      <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg flex flex-col justify-between cursor-pointer">
-        <div className="flex items-center space-x-2 mb-4">
+      <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg flex flex-col justify-between cursor-pointer">
+        <div className="flex items-center space-x-2">
           <div className="bg-purple-100 text-purple-500 p-2 rounded-full">
             <Building2 />
           </div>
           <span className="font-semibold">Pelaku Usaha</span>
         </div>
-        <div className="text-4xl md:text-5xl font-bold text-center py-2">{loading ? 'Loading...' : jumlahPelakuUsaha}</div>
-      <div>
+        <div className="text-5xl font-bold text-gray-900 text-center py-3">
+          {loading ? 'Loading...' : jumlahPelakuUsaha}
+        </div>
+        <div>
           {/* Optional: Add a tooltip or additional information here */}
           <p className="text-sm text-gray-500 italic">Data dari Laporan Q1 2025</p>
         </div>

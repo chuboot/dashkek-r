@@ -5,7 +5,7 @@ import PelakuUsahaCard from "../components/PelakuUsahaCard";
 import Sidebar from "../components/Sidebar";
 import Breadcrumb from "../components/Breadcrumb";
 import { useState } from 'react'
-import { Users } from "lucide-react"; // Import the Users icon from lucide-react
+import { Users, MessageSquareQuote, Image } from "lucide-react"; // Import the Users icon from lucide-react
 
 
 const areaData = {
@@ -88,10 +88,22 @@ const AreaDetail = () => {
                     {/* Other Menu */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                         <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer">
-                            <h4 className="text-lg font-semibold mb-2">Isu Strategis</h4>
+                            {/* <h4 className="text-lg font-semibold mb-2">Isu Strategis</h4> */}
+                            <div className="flex items-center space-x-2">
+                                <div className="bg-orange-100 text-orange-500 p-2 rounded-full">
+                                   <MessageSquareQuote />
+                                </div>
+                                <span className="font-semibold">Isu Strategis</span>
+                            </div>
                         </div>
                         <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer">
-                            <h4 className="text-lg font-semibold mb-2">Gallery</h4>
+                            {/* <h4 className="text-lg font-semibold mb-2">Gallery</h4> */}
+                            <div className="flex items-center space-x-2">
+                                <div className="bg-blue-100 text-blue-500 p-2 rounded-full">
+                                    <Image />
+                                </div>
+                                <span className="font-semibold">Gallery</span>
+                            </div>
                         </div>
                     </div>
                 </main>

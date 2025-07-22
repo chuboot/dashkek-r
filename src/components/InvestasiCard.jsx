@@ -77,7 +77,7 @@ const InvestasiCard = () => {
   }, [areaId]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer flex justify-between">
+    <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg cursor-pointer flex justify-between">
       <div className="flex flex-col justify-between">
         <div className="flex items-center space-x-2">
           <div className="bg-green-100 text-green-500 p-2 rounded-full">
@@ -85,8 +85,13 @@ const InvestasiCard = () => {
           </div>
           <span className="font-semibold">Investasi</span>
         </div>
-        <div className="text-4xl md:text-5xl font-bold  py-3">
-          {loading ? "Loading..." : jumlahInvestasi}
+        <div className="flex items-end space-x-2 py-3">
+          <span className="text-2xl font-semibold text-gray-500">Rp.</span>
+          <span className="text-4xl md:text-5xl font-bold text-gray-900">{loading ? "Loading..." : jumlahInvestasi}</span>
+          {/* <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
+          <ArrowUpRight className="w-4 h-4 mr-1" />
+          2.8%
+          </div> */}
         </div>
         <div>
           {/* Optional: Add a tooltip or additional information here */}
