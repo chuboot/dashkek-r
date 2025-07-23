@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import Breadcrumb from "../components/Breadcrumb";
 import { useState } from 'react'
 import { Users, MessageSquareQuote, Image } from "lucide-react"; // Import the Users icon from lucide-react
+import DashKekKesehatan from "../components/DashKekKesehatan";
 
 
 const areaData = {
@@ -106,6 +107,11 @@ const AreaDetail = () => {
                             </div>
                         </div>
                     </div>
+                    {/* Khusus untuk sektor Kesehatan */}
+                            {areaId === "sanur" && (
+                                // <KesehatanDetail data={headers} />
+                                <DashKekKesehatan />
+                            )}
                 </main>
             </div>
         </div>
