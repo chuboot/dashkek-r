@@ -102,24 +102,24 @@ const DashKekKesehatan = () => {
             <div className="overflow-x-auto">
               {/* Statistik ringkas */}
               <div className="mb-6 flex flex-col md:flex-row gap-4">
-                <div className="bg-white rounded shadow p-4 flex-1">
+                <div className="bg-white rounded-2xl shadow p-6 flex-1">
                   <div className="text-lg font-semibold">
                     Total Pelaku Usaha
                   </div>
-                  <div className="text-2xl font-bold">{listPU.length}</div>
+                  <div className="text-4xl font-bold text-blue-600">{listPU.length}</div>
                 </div>
-                <div className="bg-white rounded shadow p-4 flex-1">
+                <div className="bg-white rounded-2xl shadow p-6 flex-1">
                   <div className="text-lg font-semibold">Total Pasien WNI</div>
-                  <div className="text-2xl font-bold">
+                  <div className="text-4xl font-bold text-blue-600">
                     {listPU.reduce((sum, pu) => {
                       const val = pu.pasien?.WNI ? Number(pu.pasien.WNI) : 0;
                       return sum + val;
                     }, 0)}
                   </div>
                 </div>
-                <div className="bg-white rounded shadow p-4 flex-1">
+                <div className="bg-white rounded-2xl shadow p-6 flex-1">
                   <div className="text-lg font-semibold">Total Pasien WNA</div>
-                  <div className="text-2xl font-bold">
+                  <div className="text-4xl font-bold text-blue-600">
                     {listPU.reduce((sum, pu) => {
                       const val = pu.pasien?.WNA ? Number(pu.pasien.WNA) : 0;
                       return sum + val;
