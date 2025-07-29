@@ -16,7 +16,9 @@ const DashKekKesehatan = () => {
   const { areaId } = useParams();
   const [listPU, setListPU] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showTable, setShowTable] = useState(false);
+  // const [showTable, setShowTable] = useState(false);
+  const [showPasien, setShowPasien] = useState(false);
+  const [showSDM, setShowSDM] = useState(false);
   // Fetch data for KEK Kesehatan
   useEffect(() => {
     fetch(
@@ -131,19 +133,19 @@ const DashKekKesehatan = () => {
                 {/* Accordion untuk tabel pelaku usaha */}
                 <div className="mb-6">
                   <button
-                    onClick={() => setShowTable((prev) => !prev)}
+                    onClick={() => setShowPasien((prev) => !prev)}
                     className="w-full hover:bg-orange-200 text-gray-900 font-semibold py-3 px-6 border-b border-orange-200 transition-colors flex items-center justify-between"
                   >
-                    <span>Daftar Pelaku Usaha Kesehatan</span>
+                    <span>Rekap Pasien per Pelaku Usaha</span>
                     <ChevronDown
                       className={
-                        showTable
+                        showPasien
                           ? "rotate-180 transition-transform"
                           : "transition-transform"
                       }
                     />
                   </button>
-                  {showTable && (
+                  {showPasien && (
                     <div className="mt-4 animate-fade-in">
                       <table className="min-w-full bg-white rounded shadow">
                         <thead>
@@ -273,6 +275,76 @@ const DashKekKesehatan = () => {
                   
                 </div>
                 {/* akhir sdm */}
+                {/* Accordion untuk tabel SDM per Pelaku Usaha */}
+                <div className="mb-6">
+                  <button
+                    onClick={() => setShowSDM((prev) => !prev)}
+                    className="w-full hover:bg-orange-200 text-gray-900 font-semibold py-3 px-6 border-b border-orange-300 transition-colors flex items-center justify-between"
+                  >
+                    <span>Rekap SDM per Pelaku Usaha</span>
+                    <ChevronDown
+                      className={
+                        showSDM
+                          ? "rotate-180 transition-transform"
+                          : "transition-transform"
+                      }
+                    />
+                  </button>
+                  {showSDM && (
+                    <div className="mt-4 animate-fade-in">
+                      <table className="min-w-full bg-white rounded shadow">
+                        <thead>
+                          <tr>
+                            <th className="py-2 px-4 border-b border-gray-200 text-left">Pelaku Usaha</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Dokter WNI</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Dokter WNA</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Perawat WNI</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Perawat WNA</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Tenaga Kesehatan Lainnya WNI</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Tenaga Kesehatan Lainnya WNA</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Tenaga Non Kesehatan WNI</th>
+                            <th className="py-2 px-4 border-b border-gray-200 text-center">Tenaga Non Kesehatan WNA</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {listPU.map((pu, idx) => {
+                            // Helper to get WNI/WNA for a profesi
+                            const getSDM = (profesi, type) => {
+                              if (!Array.isArray(pu.sdm)) return "-";
+                              const found = pu.sdm.find((s) => s.Profesi === profesi);
+                              return found && found[type] ? found[type] : "-";
+                            };
+                            return (
+                              <tr key={idx}>
+                                <td className="py-2 px-4 border-b border-gray-200">{pu.nama}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Dokter", "WNI")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Dokter", "WNA")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Perawat", "WNI")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Perawat", "WNA")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Tenaga Medis Lainnya", "WNI")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Tenaga Medis Lainnya", "WNA")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Tenaga Non Kesehatan", "WNI")}</td>
+                                <td className="py-2 px-4 border-b border-gray-200 text-center">{getSDM("Tenaga Non Kesehatan", "WNA")}</td>
+                              </tr>
+                            );
+                          })}
+                          {/* Total row */}
+                          <tr className="font-bold bg-orange-50">
+                            <td className="py-2 px-4 border-t border-gray-300">Total</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalDokter.WNI}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalDokter.WNA}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalPerawat.WNI}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalPerawat.WNA}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalTenagaMedisLainnya.WNI}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalTenagaMedisLainnya.WNA}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalTenagaNonKesehatan.WNI}</td>
+                            <td className="py-2 px-4 border-t border-gray-300 text-center">{totalTenagaNonKesehatan.WNA}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
               </div>
 
 

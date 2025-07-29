@@ -11,31 +11,22 @@ const TenagaKerjaCard = () => {
   const { areaId } = useParams(); // <-- Get areaId from route params
 
   useEffect(() => {
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR_ECkK7QC1cAwstl9nqLf-HA3ySzXySjugSqVCsXiendHwEun3giJBH6SyIuiQR9M63K_IR6FQ2UYH/pub?output=csv')
-      .then((response) => response.text())
+    fetch('https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec')
+      .then((response) => response.json())
       .then((data) => {
-        const rows = data.split('\n').filter(row => row.trim() !== '');
-        const headers = rows[0].split(',').map(header => header.trim());
+        // data adalah array of object
         let totalPekerja = 0;
-        const pekerjaColumnIndex = headers.indexOf('Pekerja');
-        const lokasiColumnIndex = headers.indexOf('LokasiKEK');
-
-        for (let i = 1; i < rows.length; i++) {
-          const values = rows[i].split(',').map(value => value.trim());
+        data.forEach((row) => {
           if (
-            values.length > pekerjaColumnIndex &&
-            values.length > lokasiColumnIndex
+            row.LokasiKEK &&
+            row.LokasiKEK.toLowerCase() === areaId?.toLowerCase()
           ) {
-            const lokasiValue = values[lokasiColumnIndex].toLowerCase();
-            if (lokasiValue === areaId?.toLowerCase()) {
-              const pekerjaValue = parseFloat(values[pekerjaColumnIndex]);
-              if (!isNaN(pekerjaValue)) {
-                totalPekerja += pekerjaValue;
-              }
+            const pekerjaValue = parseFloat(row.Pekerja);
+            if (!isNaN(pekerjaValue)) {
+              totalPekerja += pekerjaValue;
             }
           }
-        }
-
+        });
         setJumlahPekerja(totalPekerja);
         setLoading(false);
       })

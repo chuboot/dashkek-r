@@ -11,7 +11,7 @@ const ListPelakuUsaha = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://script.google.com/macros/s/AKfycbzrPEY_RMqX-91XaSygT8_wMWxudu85T2ZNdcG6t4iHgqEeH_dQ2gqkz-c4CVInOwwA3Q/exec')
+    fetch('https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec')
       .then((response) => response.json())
       .then((data) => {
         // data adalah array of object
@@ -67,7 +67,7 @@ const ListPelakuUsaha = () => {
               <div key={index} className="bg-white p-4 rounded-lg shadow flex justify-between items-center">
                 <div className="text-lg font-semibold">{item.nama}</div>
                 <div className="flex items-center space-x-2">
-                  <div className="text-blue-500 font-bold">{item.progress}</div>
+                  <div className="text-blue-500 font-bold">{item.progress * 100 + "%"}</div>
                   <Link
                     to={`/dashboard/${areaId}/pelaku-usaha/${encodeURIComponent(item.nama)}`}
                     state={{ item }}

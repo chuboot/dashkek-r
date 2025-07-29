@@ -11,23 +11,16 @@ const PelakuUsahaCard = () => {
   const { areaId } = useParams(); // <-- Get areaId from route params
 
   useEffect(() => {
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR_ECkK7QC1cAwstl9nqLf-HA3ySzXySjugSqVCsXiendHwEun3giJBH6SyIuiQR9M63K_IR6FQ2UYH/pub?output=csv')
-      .then((response) => response.text())
+    fetch('https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec')
+      .then((response) => response.json())
       .then((data) => {
-        const rows = data.split('\n').filter(row => row.trim() !== '');
-        const headers = rows[0].split(',').map(header => header.trim());
-        let filteredRowCount = 0;
-        const locationColumnIndex = headers.indexOf('LokasiKEK');
-        for (let i = 1; i < rows.length; i++) {
-          const values = rows[i].split(',').map(value => value.trim());
-          if (values.length > locationColumnIndex) {
-            const locationValue = values[locationColumnIndex].trim().toLowerCase();
-            if (locationValue === areaId?.toLowerCase()) { // <-- Compare with areaId from params
-              filteredRowCount++;
-            }
-          }
-        }
-        setJumlahPelakuUsaha(filteredRowCount);
+        // data adalah array of object
+        const filtered = data.filter(
+          (row) =>
+            row.LokasiKEK &&
+            row.LokasiKEK.toLowerCase() === areaId?.toLowerCase()
+        );
+        setJumlahPelakuUsaha(filtered.length);
         setLoading(false);
       })
       .catch((error) => {
