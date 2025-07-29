@@ -60,7 +60,7 @@ export default function Sidebar({ isOpen, onClose }) {
       {/* Logout */}
       <button
         onClick={() => signOut(auth)}
-        className="flex items-center gap-3 px-6 py-3 text-white -500 hover:bg-[#35964f]/80 hover:text-white transition"
+        className="flex items-center gap-3 px-6 py-3 text-white -500 hover:bg-orange-700/80 hover:text-white transition"
       >
         <LogOut size={20} />
         Logout

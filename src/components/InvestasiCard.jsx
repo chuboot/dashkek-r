@@ -57,8 +57,8 @@ const InvestasiCard = () => {
           <span className="font-semibold">Investasi</span>
         </div>
         <div className="flex items-end space-x-2 py-3">
-          <span className="text-2xl font-semibold text-gray-500">Rp.</span>
-          <span className="text-4xl md:text-5xl font-bold text-gray-900">{loading ? "Loading..." : jumlahInvestasi}</span>
+          <span className="text-xl md:text-2xl font-semibold text-gray-500">Rp.</span>
+          <span className="text-2xl md:text-5xl font-bold text-gray-900">{loading ? "Loading..." : jumlahInvestasi}</span>
           <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
           <ArrowUpRight className="w-4 h-4 mr-1" />
           2.8%
