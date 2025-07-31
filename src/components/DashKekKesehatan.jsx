@@ -103,7 +103,7 @@ const DashKekKesehatan = () => {
           <div className="p-4 md:p-6">
             <div className="overflow-x-auto">
               {/* Statistik ringkas */}
-              <div className="mb-6 flex flex-col md:flex-row gap-4">
+              <div className="mb-6 flex flex-col lg:flex-row gap-4">
                 <div className="bg-white rounded-2xl shadow p-6 flex-1">
                   <div className="text-lg font-semibold">
                     Total Pelaku Usaha

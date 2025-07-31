@@ -48,18 +48,18 @@ const TenagaKerjaCard = () => {
         <div className="flex items-end space-x-2 py-3">
           <span className="text-4xl md:text-5xl font-bold text-gray-900">{loading ? "Loading..." : jumlahPekerja}</span>
           <span className="text-2xl font-semibold text-gray-500">orang</span>
-          <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
+          {/* <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
           <ArrowUpRight className="w-4 h-4 mr-1" />
           2.8%
-        </div>
+        </div> */}
         </div>
         <div>
           {/* Optional: Add a tooltip or additional information here */}
-          <p className="text-sm text-gray-500 italic">Data dari Laporan Q1 2025</p>
+          <p className="text-sm text-gray-500 italic">Data Q1 2025</p>
         </div>
       </div>
-      <div className="flex items-center justify-center">
-        <div className="w-24 h-24r">
+      <div className="flex items-center justify-center w-1/4 xl:w-1/3 ">
+        <div className="w-18 h-18 md:w-24 md:h-24">
           <Circle percent={80} strokeWidth={8} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
         </div>
       </div>

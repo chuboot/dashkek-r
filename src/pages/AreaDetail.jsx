@@ -78,7 +78,7 @@ const AreaDetail = () => {
                         <p className="text-gray-600">{area.description}</p>
                     </div>
                     {/* Statistic Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div className="grid grid-cols-1  lg:grid-cols-3 gap-10">
                         {/* Card 1 */}
                         <TenagaKerjaCard />
                         {/* Card 2 */}
