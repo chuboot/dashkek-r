@@ -49,17 +49,17 @@ const InvestasiCard = () => {
 
   return (
     <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg cursor-pointer flex justify-between">
-      <div className="flex flex-col justify-between">
+      <div className="flex-1 flex flex-col justify-between">
         <div className="flex items-center space-x-2">
           <div className="bg-green-100 text-green-500 p-2 rounded-full">
             <ChartLine />
           </div>
           <span className="font-semibold">Investasi</span>
         </div>
-        <div className="flex items-end space-x-2 py-3">
+        <div className="flex items-start space-x-2 py-3">
           <span className="text-lg md:text-xl font-semibold text-gray-500">Rp.</span>
           {/* <span className="text-4xl md:text-3xl lg:text-5xl xl:text-6xl font-bold text-gray-900">{loading ? "Loading..." : jumlahInvestasi}</span> */}
-          <span className="text-[clamp(1.5rem,2vw,4rem)] font-bold text-gray-900">{loading ? "Loading..." : jumlahInvestasi}</span>
+          <span className="text-[clamp(1rem,2.5vw,1.5rem)] font-bold text-gray-900">{loading ? "Loading..." : jumlahInvestasi}</span>
           {/* <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
           <ArrowUpRight className="w-4 h-4 mr-1" />
           2.8%
