@@ -67,7 +67,7 @@ const InvestasiCard = () => {
         </div>
         <div>
           {/* Optional: Add a tooltip or additional information here */}
-          <p className="text-sm text-gray-500 italic">Data Q1 2025 </p>
+          <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
         </div>
       </div>
       <div className="flex items-center justify-center w-1/4 xl:w-1/3">
