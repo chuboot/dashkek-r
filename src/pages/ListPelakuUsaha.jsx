@@ -61,33 +61,6 @@ const ListPelakuUsaha = () => {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            // <div className="space-y-4 max-w-2xl mx-auto">
-            //   <div className='flex justify-between text-[12px] font-semibold text-gray-500'><span>Nama Pelaku Usaha</span><span>Progress Pembangunan</span></div>
-            //   {listPU.map((item, index) => (
-            //     // console.log(item),
-            //     <div key={index} className="bg-white p-4 rounded-lg shadow flex justify-between items-center">
-            //       <div className="text-lg font-semibold">{item.nama}</div>
-            //       <div className="flex items-center space-x-2">
-            //         <div className="text-blue-500 font-bold">{item.progress * 100 + "%"}</div>
-            //         <Link
-            //           to={`/dashboard/${areaId}/pelaku-usaha/${encodeURIComponent(item.nama)}`}
-            //           state={{ item }}
-            //           className="text-orange-500 hover:text-orange-700"
-            //           title="Lihat Detail"
-            //         >
-            //           {/* <button
-            //         // onClick={() => navigate(`/detail/${encodeURIComponent(item.nama)}`)}
-            //         onClick={() => navigate(`/dashboard/${areaId}/pelaku-usaha/${encodeURIComponent(item.nama)}`)}
-            //         className="text-gray-500 hover:text-blue-500"
-            //       > */}
-
-            //           <ChevronRight size={20} />
-            //         </Link>
-            //         {/* </button> */}
-            //       </div>
-            //     </div>
-            //   ))}
-            // </div>
             <div className="space-y-4 max-w-2xl mx-auto bg-white p-6 rounded-2xl shadow">
               <div className="flex justify-between text-[12px] font-semibold text-gray-500">
                 <span>Nama Pelaku Usaha</span>

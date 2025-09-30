@@ -39,7 +39,7 @@ const PelakuUsahaCard = () => {
           <span className="font-semibold">Pelaku Usaha</span>
         </div>
         <div className="text-5xl font-bold text-gray-900 text-center py-3">
-          {loading ? 'Loading...' : jumlahPelakuUsaha}
+          {loading ? <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" /> : jumlahPelakuUsaha}
         </div>
         <div>
           {/* Optional: Add a tooltip or additional information here */}

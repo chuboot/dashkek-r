@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ListPelakuUsaha from './pages/ListPelakuUsaha';
 import NotFound from './pages/NotFound';
 import DetailPelakuUsaha from './pages/DetailPelakuUsaha';
+import ListTenagaKerja from './pages/ListTenagaKerja';
 
 
 export const router = createBrowserRouter([
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard/:areaId/pelaku-usaha',
     element: <ListPelakuUsaha />,
+  },
+  {
+    path: '/dashboard/:areaId/tenaga-kerja',
+    element: <ListTenagaKerja />,
   },
   {
     path: '*',
