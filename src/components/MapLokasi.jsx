@@ -24,7 +24,7 @@ const MapLokasi = ({ data }) => {
   }, []);
 
   return (
-    <div className="w-full h-64 md:h-80 rounded-lg overflow-hidden shadow">
+    <div className="w-full h-64 md:h-100 rounded-lg overflow-hidden shadow">
       <MapContainer
         center={position}
         zoom={14}

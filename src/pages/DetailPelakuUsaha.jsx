@@ -17,12 +17,13 @@ const DetailPelakuUsaha = () => {
         // fetch(`https://sheetdb.io/api/v1/g9tm6es3iwk8i/search?NamaPU=${encodeURIComponent(nama)}`)
         // fetch(`https://script.google.com/macros/s/AKfycbzrPEY_RMqX-91XaSygT8_wMWxudu85T2ZNdcG6t4iHgqEeH_dQ2gqkz-c4CVInOwwA3Q/exec?NamaPU=${encodeURIComponent(nama)}`)
         //https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec?namapu=PT%20Hotel%20International%20Sanur%20Indonesia
-        fetch(`https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec?namapu=${encodeURIComponent(nama)}`)
+        // fetch(`https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec?namapu=${encodeURIComponent(nama)}`)
+        fetch(`https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec?namapu=${encodeURIComponent(nama)}`)
             .then((response) => response.json())
             .then((data) => {
-                if (data.length > 0) {
-                    setHeaders(data[0]);
-                    console.log(data[0]);
+                if (data.pelakuUsaha.length > 0) {
+                    setHeaders(data.pelakuUsaha[0]);
+                    console.log(data.pelakuUsaha[0]);
                 }
                 setLoading(false);
             });
@@ -95,7 +96,7 @@ const DetailPelakuUsaha = () => {
                                             <Factory size={15} />
                                             <span className="ml-2 font-medium">Progres Pembangunan</span>
                                         </div>
-                                        <span>{headers.Progress * 100 + "%"}</span>
+                                        <span>{(headers.Progress * 100).toFixed(2) + "%"}</span>
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <div className='flex items-center'>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Circle } from "rc-progress";
 import { useParams } from "react-router-dom"; // <-- Add this import
 import { ChartLine, ArrowUpRight } from "lucide-react";
+import { Link } from 'react-router-dom'
 
 const InvestasiCard = () => {
   const [jumlahInvestasi, setJumlahInvestasi] = useState(null);
@@ -48,6 +49,7 @@ const InvestasiCard = () => {
   }, [areaId]);
 
   return (
+    <Link to={`/dashboard/${areaId}/investasi`}>
     <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg cursor-pointer flex justify-between">
       <div className="flex-1 flex flex-col justify-between">
         <div className="flex items-center space-x-2">
@@ -75,6 +77,7 @@ const InvestasiCard = () => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

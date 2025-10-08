@@ -11,16 +11,18 @@ const ListPelakuUsaha = () => {
 
   useEffect(() => {
     fetch(
-      "https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec"
+      // "https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec"
+      "https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec"
     )
       .then((response) => response.json())
       .then((data) => {
         // data adalah array of object
-        const filtered = data.filter(
+        const filtered = data.pelakuUsaha.filter(
           (row) =>
             row.LokasiKEK &&
             row.LokasiKEK.toLowerCase() === areaId?.toLowerCase()
         );
+        console.log("Filtered Data:", data.pelakuUsaha);
         setListPU(
           filtered.map((row) => ({
             nama: row.NamaPU,
@@ -89,7 +91,7 @@ const ListPelakuUsaha = () => {
                       <div className="flex items-center gap-x-1.5">
                         <div className="flex-none rounded-full p-1">
                           <p className="text-xs/5 text-gray-500">
-                            {item.progress * 100 + "%"}
+                            {(item.progress * 100).toFixed(2) + "%"}
                           </p>
                           {/* <div className="size-1.5 rounded-full bg-emerald-500" /> */}
                         </div>

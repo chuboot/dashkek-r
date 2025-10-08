@@ -26,6 +26,7 @@ import {
 import DashKekKesehatan from "../components/DashKekKesehatan";
 import { PieChart, Pie, Cell } from "recharts";
 import MapLokasi from "../components/MapLokasi";
+
 const AreaDetail = () => {
   const { areaId } = useParams();
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const AreaDetail = () => {
   useEffect(() => {
     fetch(
       // "https://script.google.com/macros/s/AKfycbzuZ4GYed2KUNvp6tqVhijo0du79igUdULyiYZHK_2cy4zoWj9Yt4ReEnqK8sFcTAO9/exec"
-      "https://script.google.com/macros/s/AKfycbw9ykhJi8PY2HuwqYs_vkAbuh_KWi_HQf9XuxuVuxyxb8QoPars5blIgTOUTLrshTiY8A/exec"
+      "https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -50,7 +51,7 @@ const AreaDetail = () => {
         // const found = data.KEK
         setArea(found[0]);
         setLoading(false);
-        console.log(found[0]);
+        // console.log(found[0]);
       })
       .catch(() => setLoading(false));
   }, [areaId]);
@@ -113,16 +114,6 @@ const AreaDetail = () => {
               { label: `${areaId}-SEZ`, active: true },
             ]}
           />
-
-          {/* <div className="mb-8">
-                        <img
-                            src={area.Image}
-                            alt={area.Title}
-                            className="w-full h-64 object-cover rounded-lg"
-                        />
-                        <h3 className="text-2xl font-semibold mt-4">{area.Title}</h3>
-                        <p className="text-gray-600">{area.Description}</p>
-                    </div> */}
           <div className="mb-8 relative">
             <img
               src={area.Image}
@@ -248,15 +239,14 @@ const AreaDetail = () => {
                     <p className="text-xl font-bold">
                       {area["Total Lahan"]} Ha
                     </p>
-                  <div className="mt-2 text-xs text-gray-600 ">
-                    <p>Luas lahan telah dikuasai</p>
-                   
+                    <div className="mt-2 text-xs text-gray-600 ">
+                      <p>Luas lahan telah dikuasai</p>
                       {(
                         (area["Lahan Dikuasai"] / area["Total Lahan"]) *
                         100
                       ).toFixed(2)}{" "}
                       % ({area["Lahan Dikuasai"]} Ha dari Luas sesuai PP)
-                  </div>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center ">
@@ -299,16 +289,16 @@ const AreaDetail = () => {
                     <p className="text-xl font-bold">
                       {area["Lahan Dimanfaatkan"]} Ha
                     </p>
-                  <div className="mt-2 text-xs text-gray-600">
-                    Luas lahan yang dimanfaatkan
-                    <br />
-                    {area["Lahan Dimanfaatkan"]} Ha (
-                    {(
-                      (area["Lahan Dimanfaatkan"] / area["Lahan Dikuasai"]) *
-                      100
-                    ).toFixed(2)}{" "}
-                    % dari Luas sesuai PP )
-                  </div>
+                    <div className="mt-2 text-xs text-gray-600">
+                      Luas lahan yang dimanfaatkan
+                      <br />
+                      {area["Lahan Dimanfaatkan"]} Ha (
+                      {(
+                        (area["Lahan Dimanfaatkan"] / area["Lahan Dikuasai"]) *
+                        100
+                      ).toFixed(2)}{" "}
+                      % dari Luas sesuai PP )
+                    </div>
                   </div>
                 </div>
               </div>
@@ -322,87 +312,10 @@ const AreaDetail = () => {
               </div>
               <div className="my-8  overflow-hidden border-1 rounded-2xl border-orange-300">
                 {/* Minimap */}
-
                 <MapLokasi data={area} />
-                {/* <div className="w-full h-64 rounded-lg overflow-hidden shadow">
-                  <iframe
-                    title="Mini Map"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    style={{ border: 0 }}
-                    src="https://www.openstreetmap.org/export/embed.html?layer=mapnik&marker=-8.73185327657203,115.23144358972414&map=18/-8.73185327657203/115.23144358972414"
-                    allowFullScreen=""
-                    aria-hidden="false"
-                    tabIndex="0"
-                  ></iframe>
-
-                  <div className="text-xs mt-1 text-gray-500">
-                    <a
-                      href="https://www.openstreetmap.org/?mlat=-8.73185327657203&mlon=115.23144358972414#map=18/-8.73185/115.23144"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      Lihat peta lebih besar
-                    </a>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
-          {/* Pie Chart Section */}
-
-          {/* <div className="flex flex-col items-start my-4 p-4 bg-white rounded-xl w-64 shadow hover:shadow-lg cursor-pointer">
-            <div className="bg-orange-500 text-white text-sm font-semibold px-2 py-1 rounded mb-2 w-max">
-              Okupansi Lahan
-            </div>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex flex-col items-center">
-                <PieChart width={80} height={80}>
-                  <Pie
-                    data={[
-                      { name: "Dikuasai", value: 100 },
-                      {
-                        name: "Sisa",
-                        value:
-                          100 -
-                          (area["Lahan Dikuasai"] / area["Total Lahan"]) * 100,
-                      },
-                    ]}
-                    cx={40}
-                    cy={40}
-                    innerRadius={25}
-                    outerRadius={35}
-                    startAngle={90}
-                    endAngle={450}
-                    dataKey="value"
-                  >
-                    <Cell fill="#f8cf2c" />
-                  </Pie>
-                </PieChart>
-              </div>
-              <div className="text-right">
-                <p className="text-xs text-gray-600">Total Luas Lahan</p>
-                <p className="text-xl font-bold">{area["Total Lahan"]} Ha</p>
-              </div>
-            </div>
-            <div className="mt-1 text-sm">
-              <p>Lahan telah dikuasai</p>
-              <p className="font-bold">
-                {(area["Lahan Dikuasai"] / area["Total Lahan"]) * 100}
-              </p>
-              <p className="font-bold">{area["Lahan Dikuasai"]} Ha</p>
-            </div>
-            <div className="mt-2 text-xs text-gray-600">
-              Luas lahan yang dimanfaatkan
-              <br />
-              {area["Lahan Dimanfaatkan"]} Ha (
-              {(area["Lahan Dimanfaatkan"] / area["Lahan Dikuasai"]) * 100} %
-              dari Luas sesuai PP)
-            </div>
-          </div> */}
-
           {/* Khusus untuk sektor Kesehatan */}
           {areaId === "sanur" && <DashKekKesehatan />}
         </main>

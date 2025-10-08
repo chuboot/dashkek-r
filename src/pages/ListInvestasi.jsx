@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Breadcrumb from '../components/Breadcrumb';
-import { Users, ArrowUpRight } from "lucide-react"; // Import the Users icon from lucide-react
+import { ChartLine, ArrowUpRight } from "lucide-react"; // Import the Users icon from lucide-react
 import { Line } from 'rc-progress';
 
-const ListTenagaKerja = () => {
+const ListInvestasi = () => {
     const { areaId } = useParams();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [listPU, setListPU] = useState([]);
     const [area, setArea] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [jumlahInvestasi, setJumlahInvestasi] = useState(null);
 
     // Fetch TargetTK dari API area KEK
     useEffect(() => {
@@ -42,12 +43,41 @@ const ListTenagaKerja = () => {
                 setListPU(
                     filtered.map((row) => ({
                         nama: row.NamaPU,
-                        pekerja: row.Pekerja || "-",
+                        investasi: row.Investasi || "-",
                     }))
                 );
                 setLoading(false);
             });
     }, [areaId]);
+
+    useEffect(() => {
+        fetch("https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec")
+          .then((response) => response.json())
+          .then((data) => {
+            let totalInvestasi = 0;
+            data.pelakuUsaha.forEach((row) => {
+              if (
+                row.LokasiKEK &&
+                row.LokasiKEK.toLowerCase() === areaId?.toLowerCase()
+              ) {
+                // Hapus karakter non-digit (kecuali koma/desimal)
+                const cleanInvestasiString = String(row.Investasi).replace(/[^0-9]/g, "");
+                const investasiValue = parseFloat(cleanInvestasiString);
+                if (!isNaN(investasiValue)) {
+                  totalInvestasi += investasiValue;
+                }
+              }
+            });
+    
+            
+            setJumlahInvestasi(totalInvestasi);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error fetching data: ", error);
+            setLoading(false);
+          });
+      }, [areaId]);
 
 
 
@@ -58,10 +88,10 @@ const ListTenagaKerja = () => {
         let sortableItems = [...listPU];
         if (sortConfig !== null) {
             sortableItems.sort((a, b) => {
-                if (sortConfig.key === "pekerja") {
+                if (sortConfig.key === "investasi") {
                     // Pastikan pekerja dibandingkan sebagai angka
-                    const aVal = parseFloat(a.pekerja) || 0;
-                    const bVal = parseFloat(b.pekerja) || 0;
+                    const aVal = parseFloat(a.investasi) || 0;
+                    const bVal = parseFloat(b.investasi) || 0;
                     return sortConfig.direction === "asc" ? aVal - bVal : bVal - aVal;
                 } else {
                     // Default string comparison
@@ -88,6 +118,12 @@ const ListTenagaKerja = () => {
         });
     };
 
+    // Helper function to format number as Rupiah
+    const formatRupiah = (number) => {
+        if (!number) return "Rp. 0";
+        return "Rp. " + number.toLocaleString("id-ID");
+    };
+
     return (
         <div className="flex min-h-screen bg-[#FFF7EF] text-gray-800">
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
@@ -101,10 +137,10 @@ const ListTenagaKerja = () => {
                         items={[
                             { label: "Home", to: "/dashboard" },
                             { label: `${areaId}-SEZ`, to: `/dashboard/${areaId}` },
-                            { label: "Tenaga Kerja", active: true },
+                            { label: "Investasi", active: true },
                         ]}
                     />
-                    <h2 className="text-2xl font-bold mb-4">Capaian Target Tenaga Kerja</h2>
+                    <h2 className="text-2xl font-bold mb-4">Capaian Target Investasi</h2>
                     {loading ? (
                         <div>Loading...</div>
                     ) : (
@@ -113,25 +149,29 @@ const ListTenagaKerja = () => {
                                 <div className="bg-white p-6 rounded-4xl shadow w-full hover:shadow-lg cursor-pointer flex justify-between my-4">
                                     <div className="flex flex-col justify-between w-full">
                                         <div className="flex items-center space-x-2">
-                                            <div className="bg-red-100 text-red-500 p-2 rounded-full">
-                                                <Users />
+                                            <div className="bg-green-100 text-green-500 p-2 rounded-full">
+                                                <ChartLine />
                                             </div>
-                                            <span className="font-semibold">Tenaga Kerja</span>
+                                            <span className="font-semibold">Investasi</span>
                                         </div>
                                         <div className="flex items-end text-gray-600 text-sm font-semibold mr-auto pt-8">
                                             <ArrowUpRight className="w-4 h-4 mr-1" />
                                             Capain / Target 2025
                                         </div>
                                         <div className="flex items-end space-x-2 pb-2">
-                                            <span className="text-4xl md:text-5xl font-bold text-gray-900">  {loading ? "Loading..." : listPU.reduce((sum, item) => sum + (parseFloat(item.pekerja) || 0), 0)}</span>
-                                            <span className="text-2xl font-semibold text-gray-500">/ {area.TargetTK} orang</span>
+                                            <span className="text-2xl md:text-3xl font-bold text-gray-900">
+                                                {loading ? "Loading..." : formatRupiah(jumlahInvestasi)}
+                                            </span>
+                                            <span className="text-xl font-semibold text-gray-500">
+                                                / {area && area.TargetInvestasi ? formatRupiah(Number(area.TargetInvestasi)) : "-"}
+                                            </span>
                                             <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
                                                 <ArrowUpRight className="w-4 h-4 mr-1" />
-                                                Tercapai : {(((listPU.reduce((sum, item) => sum + (parseFloat(item.pekerja) || 0), 0)) / area.TargetTK) * 100).toFixed(2)}%
+                                                Tercapai : {area && area.TargetInvestasi && jumlahInvestasi ? ((jumlahInvestasi / area.TargetInvestasi) * 100).toFixed(2) : "0.00"}%
                                             </div>
                                         </div>
                                         <div className="w-full h-16">
-                                            <Line percent={80} strokeWidth={3} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
+                                            <Line percent={area && area.TargetInvestasi && jumlahInvestasi ? ((jumlahInvestasi / area.TargetInvestasi) * 100).toFixed(2) : "0.00"} strokeWidth={3} strokeColor="oklch(62.7% 0.194 149.214)" steps={{ count: 15, gap: -1 }} />
                                         </div>
                                         <div>
                                             {/* Optional: Add a tooltip or additional information here */}
@@ -156,7 +196,7 @@ const ListTenagaKerja = () => {
                                             className="py-2 px-4 cursor-pointer text-left"
                                             onClick={() => handleSort("pekerja")}
                                         >
-                                            Pekerja
+                                            Investasi
                                             {sortConfig.key === "pekerja" && (
                                                 <span>{sortConfig.direction === "asc" ? " ▲" : " ▼"}</span>
                                             )}
@@ -167,7 +207,7 @@ const ListTenagaKerja = () => {
                                     {sortedListPU.map((item, index) => (
                                         <tr key={index} className="border-t border-gray-200">
                                             <td className="py-2 px-4">{item.nama}</td>
-                                            <td className="py-2 px-4">{item.pekerja}</td>
+                                            <td className="py-2 px-4">{item.investasi}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -180,4 +220,4 @@ const ListTenagaKerja = () => {
     )
 }
 
-export default ListTenagaKerja;
+export default ListInvestasi;
