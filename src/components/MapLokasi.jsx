@@ -14,7 +14,7 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapLokasi = ({ data }) => {
-    const position = data.LocationMap;
+  const position = data.LocationMap;
   const markerRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const MapLokasi = ({ data }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={position} ref={markerRef}>
-          {console.log(position)}
+          {/* {console.log(position)} */}
           <Popup autoClose={false} closeOnClick={false}>
             Lokasi KEK {data.Title}
           </Popup>

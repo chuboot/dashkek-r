@@ -194,10 +194,10 @@ const ListInvestasi = () => {
                                         </th>
                                         <th
                                             className="py-2 px-4 cursor-pointer text-left"
-                                            onClick={() => handleSort("pekerja")}
+                                            onClick={() => handleSort("investasi")}
                                         >
                                             Investasi
-                                            {sortConfig.key === "pekerja" && (
+                                            {sortConfig.key === "investasi" && (
                                                 <span>{sortConfig.direction === "asc" ? " ▲" : " ▼"}</span>
                                             )}
                                         </th>
@@ -207,7 +207,7 @@ const ListInvestasi = () => {
                                     {sortedListPU.map((item, index) => (
                                         <tr key={index} className="border-t border-gray-200">
                                             <td className="py-2 px-4">{item.nama}</td>
-                                            <td className="py-2 px-4">{item.investasi}</td>
+                                            <td className="py-2 px-4">Rp. {item.investasi}</td>
                                         </tr>
                                     ))}
                                 </tbody>

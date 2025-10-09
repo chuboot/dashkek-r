@@ -8,7 +8,24 @@ import { Link } from 'react-router-dom'
 const InvestasiCard = () => {
   const [jumlahInvestasi, setJumlahInvestasi] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [area, setArea] = useState(null);
+  const [totalInv, setTotalInv] = useState(null);
   const { areaId } = useParams(); // <-- Get areaId from route params
+
+  // Fetch TargetTK dari API area KEK
+  useEffect(() => {
+    fetch("https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec")
+      .then(res => res.json())
+      .then(data => {
+        // data: array of object, cari berdasarkan KEK === areaId
+        const found = data.KEK.filter(
+          (item) => item.ID?.toLowerCase() === areaId?.toLowerCase()
+        );
+        setArea(found[0]);
+        setLoading(false);
+        // console.log("Area Data:", found[0].TargetTK);
+      }).catch(() => setLoading(false));
+  }, [areaId]);
 
   useEffect(() => {
     fetch("https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec")
@@ -29,6 +46,9 @@ const InvestasiCard = () => {
           }
         });
 
+        setTotalInv(totalInvestasi);
+        // Format number ke dalam format Indonesia dengan satuan Miliar atau Triliun
+
         function formatLargeNumber(num) {
           const absNum = Math.abs(num);
           if (absNum >= 1e12) {
@@ -47,36 +67,51 @@ const InvestasiCard = () => {
         setLoading(false);
       });
   }, [areaId]);
+  // Optionally log the percentage before returning JSX
+  let persen = 0;
+  if (totalInv !== null && area && area.TargetInvestasi) {
+    persen = (totalInv / area.TargetInvestasi * 100).toFixed(2);
+    console.log(`persen investasi: ${persen}`);
+  }
 
   return (
     <Link to={`/dashboard/${areaId}/investasi`}>
-    <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg cursor-pointer flex justify-between">
-      <div className="flex-1 flex flex-col justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="bg-green-100 text-green-500 p-2 rounded-full">
-            <ChartLine />
+      <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg cursor-pointer flex justify-between">
+        <div className="flex-1 flex flex-col justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="bg-green-100 text-green-500 p-2 rounded-full">
+              <ChartLine />
+            </div>
+            <span className="font-semibold">Investasi</span>
           </div>
-          <span className="font-semibold">Investasi</span>
+          <div className="flex items-start space-x-2 py-3">
+            <span className="text-lg md:text-xl font-semibold text-gray-500">Rp.</span>
+            {loading ? (
+              <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" />
+            ) : (
+              <span className="text-[clamp(1.5rem,2vw,4rem)] font-bold text-gray-900">{jumlahInvestasi}</span>
+            )}
+          </div>
+          <div>
+            {/* Optional: Add a tooltip or additional information here */}
+            <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
+          </div>
         </div>
-        <div className="flex items-start space-x-2 py-3">
-          <span className="text-lg md:text-xl font-semibold text-gray-500">Rp.</span>
-          {loading ? (
-            <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" />
-          ) : (
-            <span className="text-[clamp(1.5rem,2vw,4rem)] font-bold text-gray-900">{jumlahInvestasi}</span>
-          )}
+        <div className="flex items-center justify-center w-1/4 xl:w-1/3">
+          <div className="relative w-18 h-18 md:w-24 md:h-24">
+            <Circle
+              percent={persen}
+              strokeWidth={8}
+              strokeColor="#4ade80"
+              steps={{ count: 15, gap: -1 }}
+            />
+            <span className="absolute inset-0 flex items-center justify-center text-gray-700 font-semibold">
+              {persen}%
+            </span>
+          </div>
         </div>
-        <div>
-          {/* Optional: Add a tooltip or additional information here */}
-          <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
-        </div>
+
       </div>
-      <div className="flex items-center justify-center w-1/4 xl:w-1/3">
-        <div className="w-18 h-18 md:w-24 md:h-24">
-          <Circle percent={25} strokeWidth={8} strokeColor="#4ade80" steps={{ count: 15, gap: -1 }} />
-        </div>
-      </div>
-    </div>
     </Link>
   );
 };

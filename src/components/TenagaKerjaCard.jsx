@@ -10,7 +10,23 @@ import { Link } from 'react-router-dom'
 const TenagaKerjaCard = () => {
   const [jumlahPekerja, setJumlahPekerja] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [area, setArea] = useState(null);
   const { areaId } = useParams(); // <-- Get areaId from route params
+
+   // Fetch TargetTK dari API area KEK
+      useEffect(() => {
+          fetch("https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec")
+              .then(res => res.json())
+              .then(data => {
+                  // data: array of object, cari berdasarkan KEK === areaId
+                  const found = data.KEK.filter(
+                      (item) => item.ID?.toLowerCase() === areaId?.toLowerCase()
+                  );
+                  setArea(found[0]);
+                  setLoading(false);
+                  // console.log("Area Data:", found[0].TargetTK);
+              }).catch(() => setLoading(false));
+      }, [areaId]);
 
   useEffect(() => {
     fetch('https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec')
@@ -38,6 +54,12 @@ const TenagaKerjaCard = () => {
       });
   }, [areaId]);
 
+  // Optionally log the percentage before returning JSX
+   let persen = 0;
+  if (jumlahPekerja !== null && area && area.TargetTK) {
+     persen = (jumlahPekerja / area.TargetTK * 100).toFixed(2);
+    console.log(`persen tenaga kerja: ${persen}`);
+  }
   return (
     <Link to={`/dashboard/${areaId}/tenaga-kerja`}>
       <div className="bg-white p-6 rounded-4xl shadow hover:shadow-lg cursor-pointer flex justify-between">
@@ -61,9 +83,12 @@ const TenagaKerjaCard = () => {
             <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
           </div>
         </div>
-        <div className="flex items-center justify-center w-1/4 xl:w-1/3 ">
-          <div className="w-18 h-18 md:w-24 md:h-24">
-            <Circle percent={80} strokeWidth={8} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
+        <div className="flex items-center justify-center w-1/4 xl:w-1/3">
+          <div className="relative w-18 h-18 md:w-24 md:h-24">
+            <Circle percent={persen} strokeWidth={8} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
+            <span className="absolute inset-0 flex items-center justify-center text-gray-700 font-semibold">
+              {persen}%
+            </span>
           </div>
         </div>
 
