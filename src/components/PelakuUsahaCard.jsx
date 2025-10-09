@@ -11,11 +11,11 @@ const PelakuUsahaCard = () => {
   const { areaId } = useParams(); // <-- Get areaId from route params
 
   useEffect(() => {
-    fetch('https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec')
+    fetch(import.meta.env.VITE_API_URL)
       .then((response) => response.json())
       .then((data) => {
         // data adalah array of object
-        const filtered = data.filter(
+        const filtered = data.pelakuUsaha.filter(
           (row) =>
             row.LokasiKEK &&
             row.LokasiKEK.toLowerCase() === areaId?.toLowerCase()

@@ -15,7 +15,7 @@ const ListInvestasi = () => {
 
     // Fetch TargetTK dari API area KEK
     useEffect(() => {
-        fetch("https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec")
+       fetch(import.meta.env.VITE_API_URL)
             .then(res => res.json())
             .then(data => {
                 // data: array of object, cari berdasarkan KEK === areaId
@@ -29,9 +29,7 @@ const ListInvestasi = () => {
     }, [areaId]);
 
     useEffect(() => {
-        fetch(
-            "https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec"
-        )
+        fetch(import.meta.env.VITE_API_URL)
             .then((response) => response.json())
             .then((data) => {
                 // data adalah array of object
@@ -51,7 +49,7 @@ const ListInvestasi = () => {
     }, [areaId]);
 
     useEffect(() => {
-        fetch("https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec")
+        fetch(import.meta.env.VITE_API_URL)
           .then((response) => response.json())
           .then((data) => {
             let totalInvestasi = 0;

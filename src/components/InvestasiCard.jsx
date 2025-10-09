@@ -14,7 +14,7 @@ const InvestasiCard = () => {
 
   // Fetch TargetTK dari API area KEK
   useEffect(() => {
-    fetch("https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec")
+    fetch(import.meta.env.VITE_API_URL)
       .then(res => res.json())
       .then(data => {
         // data: array of object, cari berdasarkan KEK === areaId
@@ -28,11 +28,11 @@ const InvestasiCard = () => {
   }, [areaId]);
 
   useEffect(() => {
-    fetch("https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec")
+    fetch(import.meta.env.VITE_API_URL)
       .then((response) => response.json())
       .then((data) => {
         let totalInvestasi = 0;
-        data.forEach((row) => {
+        data.pelakuUsaha.forEach((row) => {
           if (
             row.LokasiKEK &&
             row.LokasiKEK.toLowerCase() === areaId?.toLowerCase()

@@ -21,10 +21,7 @@ const DashKekKesehatan = () => {
   const [showSDM, setShowSDM] = useState(false);
   // Fetch data for KEK Kesehatan
   useEffect(() => {
-    fetch(
-      // "https://script.google.com/macros/s/AKfycbz1klGLrgBUrtJBf5q_L01Ch9m-luFUpCwks9cJAodvJ410pVJa7-AJz25csQSPszZG5Q/exec"
-      "https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec"
-    )
+  fetch(import.meta.env.VITE_API_URL)
       .then((response) => response.json())
       .then((data) => {
         // data adalah array of object

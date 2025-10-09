@@ -38,10 +38,7 @@ const AreaDetail = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch(
-      // "https://script.google.com/macros/s/AKfycbzuZ4GYed2KUNvp6tqVhijo0du79igUdULyiYZHK_2cy4zoWj9Yt4ReEnqK8sFcTAO9/exec"
-      "https://script.google.com/macros/s/AKfycbyRjzYapewb4kFAiBZq60RI1SBxvI8WNO11RHCvy3e7xslQSdaJzlWJC2AXnzs-qkM8Bg/exec"
-    )
+    fetch(import.meta.env.VITE_API_URL)
       .then((res) => res.json())
       .then((data) => {
         // data: array of object, cari berdasarkan areaId
