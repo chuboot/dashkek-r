@@ -171,8 +171,8 @@ const ListTenagaKerja = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="py-2 px-4">{area.BUPP} (BUPP)</td>
-                                        <td className="py-2 px-4">{area.CapaianTKBU}</td>
+                                        <td className="py-2 px-4 font-medium">{area.BUPP} (BUPP)</td>
+                                        <td className="py-2 px-4 font-medium">{area.CapaianTKBU}</td>
 
                                     </tr>
                                     {sortedListPU.map((item, index) => (

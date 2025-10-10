@@ -205,8 +205,8 @@ const ListInvestasi = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className="py-2 px-4">{area.BUPP} (BUPP)</td>
-                                        <td className="py-2 px-4">{formatRupiah(Number(area.CapaianInvBU))}</td>
+                                        <td className="py-2 px-4 font-medium">{area.BUPP} (BUPP)</td>
+                                        <td className="py-2 px-4 font-medium">{formatRupiah(Number(area.CapaianInvBU))}</td>
 
                                     </tr>
                                     {sortedListPU.map((item, index) => (
