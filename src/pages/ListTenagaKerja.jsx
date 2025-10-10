@@ -47,6 +47,7 @@ const ListTenagaKerja = () => {
             });
     }, [areaId]);
 
+  
 
 
     // State for sorting
@@ -75,6 +76,13 @@ const ListTenagaKerja = () => {
         }
         return sortableItems;
     }, [listPU, sortConfig]);
+
+    
+
+       let totalTKBU = 0;
+   if (area && area.CapaianTKBU) {
+     totalTKBU = parseInt(listPU.reduce((sum, item) => sum + (parseFloat(item.pekerja) || 0), 0)) + parseInt(area.CapaianTKBU);
+   }
 
     // Handler for sorting
     const handleSort = (key) => {
@@ -121,15 +129,15 @@ const ListTenagaKerja = () => {
                                             Capain / Target 2025
                                         </div>
                                         <div className="flex items-end space-x-2 pb-2">
-                                            <span className="text-4xl md:text-5xl font-bold text-gray-900">  {loading ? "Loading..." : listPU.reduce((sum, item) => sum + (parseFloat(item.pekerja) || 0), 0)}</span>
+                                            <span className="text-4xl md:text-5xl font-bold text-gray-900">  {loading ? "Loading..." : totalTKBU}</span>
                                             <span className="text-2xl font-semibold text-gray-500">/ {area.TargetTK} orang</span>
                                             <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
                                                 <ArrowUpRight className="w-4 h-4 mr-1" />
-                                                Tercapai : {(((listPU.reduce((sum, item) => sum + (parseFloat(item.pekerja) || 0), 0)) / area.TargetTK) * 100).toFixed(2)}%
+                                                Tercapai : {((totalTKBU / area.TargetTK) * 100).toFixed(2)}%
                                             </div>
                                         </div>
                                         <div className="w-full h-16">
-                                            <Line percent={80} strokeWidth={3} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
+                                            <Line percent={((totalTKBU / area.TargetTK) * 100).toFixed(2)} strokeWidth={3} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
                                         </div>
                                         <div>
                                             {/* Optional: Add a tooltip or additional information here */}
@@ -162,6 +170,11 @@ const ListTenagaKerja = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td className="py-2 px-4">{area.BUPP} (BUPP)</td>
+                                        <td className="py-2 px-4">{area.CapaianTKBU}</td>
+
+                                    </tr>
                                     {sortedListPU.map((item, index) => (
                                         <tr key={index} className="border-t border-gray-200">
                                             <td className="py-2 px-4">{item.nama}</td>

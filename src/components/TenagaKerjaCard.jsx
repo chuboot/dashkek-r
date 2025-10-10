@@ -56,8 +56,12 @@ const TenagaKerjaCard = () => {
 
   // Optionally log the percentage before returning JSX
    let persen = 0;
+   let totalTKBU = 0;
+   if (area && area.CapaianTKBU) {
+     totalTKBU = parseInt(jumlahPekerja) + parseInt(area.CapaianTKBU);
+   }
   if (jumlahPekerja !== null && area && area.TargetTK) {
-     persen = (jumlahPekerja / area.TargetTK * 100).toFixed(2);
+     persen = (totalTKBU / area.TargetTK * 100).toFixed(2);
     console.log(`persen tenaga kerja: ${persen}`);
   }
   return (
@@ -71,7 +75,7 @@ const TenagaKerjaCard = () => {
             <span className="font-semibold">Tenaga Kerja</span>
           </div>
           <div className="flex items-end space-x-2 py-3">
-            <span className="text-4xl md:text-5xl font-bold text-gray-900">{loading ? <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" /> : jumlahPekerja}</span>
+            <span className="text-4xl md:text-5xl font-bold text-gray-900">{loading ? <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" /> : totalTKBU}</span>
             <span className="text-2xl font-semibold text-gray-500">orang</span>
             {/* <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
             <ArrowUpRight className="w-4 h-4 mr-1" />

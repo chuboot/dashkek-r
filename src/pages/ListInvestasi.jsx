@@ -116,6 +116,8 @@ const ListInvestasi = () => {
         });
     };
 
+    let jumInvestasi = 0;
+  jumInvestasi = parseInt(jumlahInvestasi) + parseInt(area?.CapaianInvBU || 0);
     // Helper function to format number as Rupiah
     const formatRupiah = (number) => {
         if (!number) return "Rp. 0";
@@ -158,18 +160,18 @@ const ListInvestasi = () => {
                                         </div>
                                         <div className="flex items-end space-x-2 pb-2">
                                             <span className="text-2xl md:text-3xl font-bold text-gray-900">
-                                                {loading ? "Loading..." : formatRupiah(jumlahInvestasi)}
+                                                {loading ? "Loading..." : formatRupiah(jumInvestasi)}
                                             </span>
                                             <span className="text-xl font-semibold text-gray-500">
                                                 / {area && area.TargetInvestasi ? formatRupiah(Number(area.TargetInvestasi)) : "-"}
                                             </span>
                                             <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
                                                 <ArrowUpRight className="w-4 h-4 mr-1" />
-                                                Tercapai : {area && area.TargetInvestasi && jumlahInvestasi ? ((jumlahInvestasi / area.TargetInvestasi) * 100).toFixed(2) : "0.00"}%
+                                                Tercapai : {area && area.TargetInvestasi && jumlahInvestasi ? ((jumInvestasi / area.TargetInvestasi) * 100).toFixed(2) : "0.00"}%
                                             </div>
                                         </div>
                                         <div className="w-full h-16">
-                                            <Line percent={area && area.TargetInvestasi && jumlahInvestasi ? ((jumlahInvestasi / area.TargetInvestasi) * 100).toFixed(2) : "0.00"} strokeWidth={3} strokeColor="oklch(62.7% 0.194 149.214)" steps={{ count: 15, gap: -1 }} />
+                                            <Line percent={area && area.TargetInvestasi && jumlahInvestasi ? ((jumInvestasi / area.TargetInvestasi) * 100).toFixed(2) : "0.00"} strokeWidth={3} strokeColor="oklch(62.7% 0.194 149.214)" steps={{ count: 15, gap: -1 }} />
                                         </div>
                                         <div>
                                             {/* Optional: Add a tooltip or additional information here */}
@@ -202,6 +204,11 @@ const ListInvestasi = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td className="py-2 px-4">{area.BUPP} (BUPP)</td>
+                                        <td className="py-2 px-4">{formatRupiah(Number(area.CapaianInvBU))}</td>
+
+                                    </tr>
                                     {sortedListPU.map((item, index) => (
                                         <tr key={index} className="border-t border-gray-200">
                                             <td className="py-2 px-4">{item.nama}</td>

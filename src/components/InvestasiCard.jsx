@@ -6,7 +6,7 @@ import { ChartLine, ArrowUpRight } from "lucide-react";
 import { Link } from 'react-router-dom'
 
 const InvestasiCard = () => {
-  const [jumlahInvestasi, setJumlahInvestasi] = useState(null);
+  // const [jumlahInvestasi, setJumlahInvestasi] = useState(null);
   const [loading, setLoading] = useState(true);
   const [area, setArea] = useState(null);
   const [totalInv, setTotalInv] = useState(null);
@@ -49,17 +49,8 @@ const InvestasiCard = () => {
         setTotalInv(totalInvestasi);
         // Format number ke dalam format Indonesia dengan satuan Miliar atau Triliun
 
-        function formatLargeNumber(num) {
-          const absNum = Math.abs(num);
-          if (absNum >= 1e12) {
-            return (num / 1e12).toFixed(2) + " T";
-          }
-          if (absNum >= 1e9) {
-            return (num / 1e9).toFixed(2) + " M";
-          }
-          return num.toLocaleString("id-ID");
-        }
-        setJumlahInvestasi(formatLargeNumber(totalInvestasi));
+        
+        // setJumlahInvestasi(formatLargeNumber(totalInvestasi));
         setLoading(false);
       })
       .catch((error) => {
@@ -70,8 +61,23 @@ const InvestasiCard = () => {
   // Optionally log the percentage before returning JSX
   let persen = 0;
   if (totalInv !== null && area && area.TargetInvestasi) {
-    persen = (totalInv / area.TargetInvestasi * 100).toFixed(2);
+    persen = ((parseInt(totalInv) + parseInt(area?.CapaianInvBU || 0)) / area.TargetInvestasi * 100).toFixed(2);
     console.log(`persen investasi: ${persen}`);
+  }
+
+  let jumlahInvestasi = 0;
+  jumlahInvestasi = parseInt(totalInv) + parseInt(area?.CapaianInvBU || 0);
+
+  function formatLargeNumber(num) {
+    if (typeof num !== "number" || isNaN(num)) return "0";
+    const absNum = Math.abs(num);
+    if (absNum >= 1e12) {
+      return (num / 1e12).toFixed(2) + " T";
+    }
+    if (absNum >= 1e9) {
+      return (num / 1e9).toFixed(2) + " M";
+    }
+    return num.toLocaleString("id-ID");
   }
 
   return (
@@ -89,7 +95,7 @@ const InvestasiCard = () => {
             {loading ? (
               <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" />
             ) : (
-              <span className="text-[clamp(1.5rem,2vw,4rem)] font-bold text-gray-900">{jumlahInvestasi}</span>
+              <span className="text-[clamp(1.5rem,2vw,4rem)] font-bold text-gray-900">{formatLargeNumber(jumlahInvestasi)}</span>
             )}
           </div>
           <div>
