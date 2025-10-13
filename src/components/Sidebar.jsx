@@ -15,7 +15,7 @@ export default function Sidebar({ isOpen, onClose }) {
     { to: "/dashboard", label: "Dashboard", icon: Home },
     { to: "/dashboard/sanur/pelaku-usaha", label: "BUPP / PU", icon: Users },
     { to: "/investasi", label: "Investasi", icon: DollarSign },
-    { to: "/tenagakerja", label: "Tenaga Kerja", icon: Briefcase },
+    { to: "/dashboard/tenagakerja", label: "Tenaga Kerja", icon: Briefcase },
     { to: "/progress", label: "Progress", icon: BarChart3 },
   ];
 

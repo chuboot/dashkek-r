@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import DetailPelakuUsaha from './pages/DetailPelakuUsaha';
 import ListTenagaKerja from './pages/ListTenagaKerja';
 import ListInvestasi from './pages/ListInvestasi';
+import TenagaKerjaPage from './pages/TenagaKerjaPage';
 
 
 export const router = createBrowserRouter([
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard/:areaId/investasi',
     element: <ListInvestasi />,
+  },
+  {
+    path: '/dashboard/tenagakerja',
+    element: <TenagaKerjaPage />,
   },
   {
     path: '*',
