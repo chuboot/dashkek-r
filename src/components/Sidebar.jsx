@@ -13,15 +13,15 @@ import {
 export default function Sidebar({ isOpen, onClose }) {
   const menu = [
     { to: "/dashboard", label: "Dashboard", icon: Home },
-    { to: "/dashboard/sanur/pelaku-usaha", label: "BUPP / PU", icon: Users },
-    { to: "/investasi", label: "Investasi", icon: DollarSign },
+    { to: "/dashboard/badan-pelaku-usaha", label: "BUPP / PU", icon: Users },
+    { to: "/dashboard/investasi", label: "Investasi", icon: DollarSign },
     { to: "/dashboard/tenagakerja", label: "Tenaga Kerja", icon: Briefcase },
-    { to: "/progress", label: "Progress", icon: BarChart3 },
+    { to: "/dashboard/progress", label: "Progress", icon: BarChart3 },
   ];
 
   return (
     <aside
-      className={`fixed md:static inset-y-0 left-0 z-20 w-64 flex flex-col
+      className={`fixed md:static inset-y-0 left-0 z-20 w-48 flex flex-col
                   bg-orange-400 text-white
                   transform ${isOpen ? "translate-x-0" : "-translate-x-full"}
                   md:translate-x-0 transition-transform duration-200`}

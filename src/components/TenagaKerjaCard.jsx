@@ -74,7 +74,7 @@ const TenagaKerjaCard = () => {
             </div>
             <span className="font-semibold">Tenaga Kerja</span>
           </div>
-          <div className="flex items-end space-x-2 py-3">
+          <div className="flex items-end space-x-2 py-3 ">
             <span className="text-4xl md:text-5xl font-bold text-gray-900">{loading ? <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" /> : totalTKBU}</span>
             <span className="text-2xl font-semibold text-gray-500">orang</span>
             {/* <div className="flex items-center text-green-600 text-sm font-semibold ml-auto">
@@ -87,8 +87,8 @@ const TenagaKerjaCard = () => {
             <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
           </div>
         </div>
-        <div className="flex items-center justify-center w-1/4 xl:w-1/3">
-          <div className="relative w-18 h-18 md:w-24 md:h-24">
+        <div className="flex items-center justify-center w-1/3">
+          <div className="relative w-18 h-18 ">
             <Circle percent={persen} strokeWidth={8} strokeColor="#f87171" steps={{ count: 15, gap: -1 }} />
             <span className="absolute inset-0 flex items-center justify-center text-gray-700 font-semibold">
               {persen}%

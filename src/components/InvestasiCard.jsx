@@ -91,11 +91,11 @@ const InvestasiCard = () => {
             <span className="font-semibold">Investasi</span>
           </div>
           <div className="flex items-start space-x-2 py-3">
-            <span className="text-lg md:text-xl font-semibold text-gray-500">Rp.</span>
+            <span className="text-sm md:text-md font-semibold text-gray-500">Rp.</span>
             {loading ? (
               <span className="inline-block w-32 h-10 bg-gray-200 rounded animate-pulse" />
             ) : (
-              <span className="text-[clamp(1.5rem,2vw,4rem)] font-bold text-gray-900">{formatLargeNumber(jumlahInvestasi)}</span>
+              <span className="text-[clamp(2rem,2vw,4rem)] font-bold text-gray-900">{formatLargeNumber(jumlahInvestasi)}</span>
             )}
           </div>
           <div>
@@ -103,8 +103,8 @@ const InvestasiCard = () => {
             <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
           </div>
         </div>
-        <div className="flex items-center justify-center w-1/4 xl:w-1/3">
-          <div className="relative w-18 h-18 md:w-24 md:h-24">
+        <div className="flex items-center justify-center w-1/3">
+          <div className="relative w-18 h-18">
             <Circle
               percent={persen}
               strokeWidth={8}

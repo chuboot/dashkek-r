@@ -9,6 +9,9 @@ import DetailPelakuUsaha from './pages/DetailPelakuUsaha';
 import ListTenagaKerja from './pages/ListTenagaKerja';
 import ListInvestasi from './pages/ListInvestasi';
 import TenagaKerjaPage from './pages/TenagaKerjaPage';
+import InvestasiPage from './pages/InvestasiPage';
+import ProgressPage from './pages/ProgressPage';
+import BadanPelakuUsahaPage from './pages/BadanPelakuUsahaPage';
 
 
 export const router = createBrowserRouter([
@@ -55,6 +58,18 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard/tenagakerja',
     element: <TenagaKerjaPage />,
+  },
+  {
+    path: '/dashboard/investasi',
+    element: <InvestasiPage />,
+  },
+  {
+    path: '/dashboard/progress',
+    element: <ProgressPage />,
+  },
+  {
+    path: '/dashboard/badan-pelaku-usaha',
+    element: <BadanPelakuUsahaPage />,
   },
   {
     path: '*',
