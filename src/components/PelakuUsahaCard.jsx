@@ -43,7 +43,7 @@ const PelakuUsahaCard = () => {
         </div>
         <div>
           {/* Optional: Add a tooltip or additional information here */}
-          <p className="text-sm text-gray-500 italic">Data s/d Q2 2025</p>
+          <p className="text-sm text-gray-500 italic">Data s/d Q3 2025</p>
         </div>
       </div>
     </Link>
