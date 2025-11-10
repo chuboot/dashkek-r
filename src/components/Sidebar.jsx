@@ -8,6 +8,7 @@ import {
   DollarSign,
   Briefcase,
   LogOut,
+  BookOpenCheck,
 } from "lucide-react";
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -17,6 +18,7 @@ export default function Sidebar({ isOpen, onClose }) {
     { to: "/dashboard/investasi", label: "Investasi", icon: DollarSign },
     { to: "/dashboard/tenagakerja", label: "Tenaga Kerja", icon: Briefcase },
     { to: "/dashboard/progress", label: "Progress", icon: BarChart3 },
+    { to: "/dashboard/media-publik", label: "Media Publik", icon: BookOpenCheck },
   ];
 
   return (

@@ -12,6 +12,7 @@ import TenagaKerjaPage from './pages/TenagaKerjaPage';
 import InvestasiPage from './pages/InvestasiPage';
 import ProgressPage from './pages/ProgressPage';
 import BadanPelakuUsahaPage from './pages/BadanPelakuUsahaPage';
+import ListMediaPublic from './pages/ListMediaPublic';
 
 
 export const router = createBrowserRouter([
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard/badan-pelaku-usaha',
     element: <BadanPelakuUsahaPage />,
+  },
+  {
+    path: '/dashboard/media-publik',
+    element: <ListMediaPublic />,
   },
   {
     path: '*',
