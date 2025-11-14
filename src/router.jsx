@@ -13,6 +13,8 @@ import InvestasiPage from './pages/InvestasiPage';
 import ProgressPage from './pages/ProgressPage';
 import BadanPelakuUsahaPage from './pages/BadanPelakuUsahaPage';
 import ListMediaPublic from './pages/ListMediaPublic';
+import ListJdih from './pages/ListJdih';
+import PdfViewer from "./pages/PdfViewer";
 
 
 export const router = createBrowserRouter([
@@ -75,6 +77,14 @@ export const router = createBrowserRouter([
   {
     path: '/dashboard/media-publik',
     element: <ListMediaPublic />,
+  },
+  {
+    path: '/dashboard/jdih',
+    element: <ListJdih />,
+  },
+  {
+    path: '/view/:file',
+    element: <PdfViewer />,
   },
   {
     path: '*',
