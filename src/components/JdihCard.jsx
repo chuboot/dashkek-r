@@ -1,7 +1,7 @@
 import { FileText, Download, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const JdihCard = ({ title, deskripsi, kategori, tglTerbit, size, fileUrl }) => {
+const JdihCard = ({ title, deskripsi, kategori, tglTerbit, fileUrl }) => {
   const fileName = fileUrl.split("/").pop(); // ambil nama file
 
   return (
@@ -16,9 +16,7 @@ const JdihCard = ({ title, deskripsi, kategori, tglTerbit, size, fileUrl }) => {
           <h2 className="text-gray-900 font-semibold text-lg">{title}</h2>
           <p className="text-gray-600 text-sm">{deskripsi}</p>
 
-          <span className="inline-block mt-2 bg-yellow-400 text-gray-900 text-xs font-medium px-2 py-1 rounded">
-            {size}
-          </span>
+          
         </div>
       </div>
 
