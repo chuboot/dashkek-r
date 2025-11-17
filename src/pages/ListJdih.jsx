@@ -149,8 +149,10 @@ fileUrl: "/pdfs/PERDENAS-KEK-No1-2024.pdf",
 
           <h2 className="text-3xl font-semibold mb-2">JDIH</h2>
           <p className="text-base text-gray-600 mb-6 max-w-xl">
-            "Welcome to JDIH — kumpulan dokumen publik yang berisi peraturan,
-            UU, dan informasi resmi terkait Kawasan Ekonomi Khusus."
+            Selamat datang di Jaringan Dokumentasi dan Informasi Hukum (JDIH)
+            <br />
+            <br />
+            "Dashboard JDIH ini menampilkan kumpulan dokumen Hukum dan informasi resmi mengenai Kawasan Ekonomi Khusus, termasuk peraturan, Undang-Undang, dan ketentuan terkait lainnya."
           </p>
 
           <ul className="space-y-4 max-w-2xl">
